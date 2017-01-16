@@ -41,24 +41,7 @@ namespace System.Windows.Threading
 #endif
 #if NETFX_CORE || WINDOWS_UWP
             CoreDispatcher dispatcher = new UserControl().Dispatcher;            
-#endif
-            //#if !WinRT
-            //            Dispatcher dispatcher = null;
-            //#else
-            //            CoreDispatcher dispatcher = null;
-            //#endif
-
-            //#if SILVERLIGHT
-            //            dispatcher = Deployment.Current.Dispatcher;
-            //#elif WinRT
-            //            dispatcher = new UserControl().Dispatcher;
-            //#else
-            //            dispatcher = Dispatcher.CurrentDispatcher;
-            //            //if (Application.Current != null && Application.Current.Dispatcher != null)
-            //            //    dispatcher = Application.Current.Dispatcher;
-            //#endif            
-
-
+#endif                    
             _dispatch = (action, @async, prio) =>
             {
 #if NET45
@@ -76,17 +59,7 @@ namespace System.Windows.Threading
 #endif
 #if NETFX_CORE || WINDOWS_UWP
                     dispatcher.RunAsync(prio, () => action());
-#endif
-                                       
-//#if WinRT
-//#pragma warning disable 4014
-//                    dispatcher.RunAsync(prio,()=>action());
-//#pragma warning restore 4014
-//#elif SILVERLIGHT
-//                    dispatcher.BeginInvoke(action);
-//#else
-//                    dispatcher.BeginInvoke(action, prio);
-//#endif
+#endif                                       
                 }
             };
         }
@@ -97,18 +70,7 @@ namespace System.Windows.Threading
         /// <param name="action">Action</param>
         public void BeginOnUiThread(Action action)
         {
-            BeginOnUiThread(Consts.DispatcherPriority, action);
-
-            //#if SILVERLIGHT
-            //            EnsureDispatch();
-            //            _dispatch(action, true);            
-
-            //#elif WinRT
-            //            EnsureDispatch();
-            //            _dispatch(action, true,CoreDispatcherPriority.Normal);
-            //#else
-            //            BeginOnUiThread(Consts.DispatcherPriority, action);
-            //#endif
+            BeginOnUiThread(Consts.DispatcherPriority, action);            
         }
 
         /// <summary>
