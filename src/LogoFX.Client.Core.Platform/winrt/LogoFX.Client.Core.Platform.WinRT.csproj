@@ -36,6 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <ProjectReference Include="..\..\LogoFX.Client.Core\LogoFX.Client.Core.csproj">
+      <Project>{E84A106C-3F18-4FB3-B3B8-61C3760AC548}</Project>
+      <Name>LogoFX.Client.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TargetPlatform Include="Windows, Version=8.1" />
@@ -48,11 +52,8 @@
     <Compile Include="..\src\Consts.cs">
       <Link>Consts.cs</Link>
     </Compile>
-    <Compile Include="..\src\DefaultDispatch.cs">
-      <Link>DefaultDispatch.cs</Link>
-    </Compile>
-    <Compile Include="..\src\Dispatch.cs">
-      <Link>Dispatch.cs</Link>
+    <Compile Include="..\src\PlatformDispatch.cs">
+      <Link>PlatformDispatch.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

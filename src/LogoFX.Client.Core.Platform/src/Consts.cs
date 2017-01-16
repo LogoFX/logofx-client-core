@@ -1,4 +1,6 @@
-﻿using System.Windows.Threading;
+﻿#if NET45
+using System.Windows.Threading;
+#endif
 
 namespace LogoFX.Client.Core
 {
