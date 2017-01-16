@@ -33,9 +33,6 @@
     <DocumentationFile>..\Bin\portable\Release\LogoFX.Client.Core.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="DefaultDispatch.cs" />
     <Compile Include="Dispatch.cs" />
     <Compile Include="IDispatch.cs" />
