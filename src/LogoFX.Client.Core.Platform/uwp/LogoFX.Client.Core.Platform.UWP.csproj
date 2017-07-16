@@ -121,9 +121,9 @@
     <EmbeddedResource Include="Properties\LogoFX.Client.Core.Platform.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LogoFX.Client.Core\portable\LogoFX.Client.Core.csproj">
-      <Project>{E84A106C-3F18-4FB3-B3B8-61C3760AC548}</Project>
-      <Name>LogoFX.Client.Core</Name>
+    <ProjectReference Include="..\..\LogoFX.Client.Core\netstandard1.3\LogoFX.Client.Core.NETStandard13.csproj">
+      <Project>{e1e590c5-add2-47ac-b41b-9a6702d4ea28}</Project>
+      <Name>LogoFX.Client.Core.NETStandard13</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
