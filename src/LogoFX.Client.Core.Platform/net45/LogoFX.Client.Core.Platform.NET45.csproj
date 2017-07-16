@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LogoFX.Client.Core\LogoFX.Client.Core.csproj">
+    <ProjectReference Include="..\..\LogoFX.Client.Core\portable\LogoFX.Client.Core.csproj">
       <Project>{E84A106C-3F18-4FB3-B3B8-61C3760AC548}</Project>
       <Name>LogoFX.Client.Core</Name>
     </ProjectReference>
