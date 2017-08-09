@@ -53,9 +53,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LogoFX.Client.Core\portable\LogoFX.Client.Core.csproj">
-      <Project>{E84A106C-3F18-4FB3-B3B8-61C3760AC548}</Project>
-      <Name>LogoFX.Client.Core</Name>
+    <ProjectReference Include="..\..\LogoFX.Client.Core\net45\LogoFX.Client.Core.NET45.csproj">
+      <Project>{7e1fdd31-2f08-4b15-a8c9-6adbbb80f21a}</Project>
+      <Name>LogoFX.Client.Core.NET45</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
