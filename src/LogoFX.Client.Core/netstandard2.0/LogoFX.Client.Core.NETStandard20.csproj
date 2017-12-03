@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssemblyName>LogoFX.Client.Core</AssemblyName>
+    <RootNamespace>LogoFX.Client.Core</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\Bin\netstandard2.0\Release</OutputPath>
+    <DocumentationFile>..\..\Bin\netstandard2.0\Release\netstandard2.0\LogoFX.Client.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="..\src\DefaultDispatch.cs" Link="DefaultDispatch.cs" />
+    <Compile Include="..\src\Dispatch.cs" Link="Dispatch.cs" />
+    <Compile Include="..\src\IDispatch.cs" Link="IDispatch.cs" />
+    <Compile Include="..\src\NotifyPropertyChanged.cs" Link="NotifyPropertyChanged.cs" />
+    <Compile Include="..\src\ReentranceGuard.cs" Link="ReentranceGuard.cs" />
+  </ItemGroup>
+
+</Project>
