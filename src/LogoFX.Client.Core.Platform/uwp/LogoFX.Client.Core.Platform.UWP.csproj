@@ -118,15 +118,15 @@
     <EmbeddedResource Include="Properties\LogoFX.Client.Core.Platform.UWP.rd.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LogoFX.Client.Core\netstandard1.3\LogoFX.Client.Core.NETStandard13.csproj">
-      <Project>{e1e590c5-add2-47ac-b41b-9a6702d4ea28}</Project>
-      <Name>LogoFX.Client.Core.NETStandard13</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.5</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\LogoFX.Client.Core\netstandard2.0\LogoFX.Client.Core.NETStandard20.csproj">
+      <Project>{9c31b68b-eaa6-4e8b-bc2d-027187cdfbb4}</Project>
+      <Name>LogoFX.Client.Core.NETStandard20</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
