@@ -13,7 +13,7 @@ namespace System.Windows.Threading
     public class PlatformDispatch : IDispatch
     {
         private Action<Action, bool,
-#if NET45
+#if NET
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -34,7 +34,7 @@ namespace System.Windows.Threading
         /// </summary>
         public void InitializeDispatch()
         {
-#if NET45
+#if NET
             Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
             if (dispatcher == null)
                 throw new InvalidOperationException("Dispatch is not initialized correctly");
@@ -54,7 +54,7 @@ namespace System.Windows.Threading
                 }               
                 else
                 {
-#if NET45
+#if NET
                     dispatcher.BeginInvoke(action, prio);
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -79,7 +79,7 @@ namespace System.Windows.Threading
         /// <param name="prio">Desired priority</param>
         /// <param name="action">Action</param>
         public void BeginOnUiThread(
-#if NET45
+#if NET
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -106,7 +106,7 @@ namespace System.Windows.Threading
         /// <param name="priority">Desired priority</param>
         /// <param name="action">Action</param>
         public void OnUiThread(
-#if NET45
+#if NET
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP

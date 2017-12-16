@@ -40,12 +40,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LogoFX.Client.Core.Platform\net45\LogoFX.Client.Core.Platform.NET45.csproj">
-      <Project>{27C2028A-1934-447F-953D-A6E2CB2851E1}</Project>
-      <Name>LogoFX.Client.Core.Platform.NET45</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

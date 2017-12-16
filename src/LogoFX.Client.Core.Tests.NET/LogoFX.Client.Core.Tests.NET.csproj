@@ -7,10 +7,11 @@
     <ProjectGuid>{DD270850-98CC-4029-BDDD-AAB0627BCF6A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LogoFX.Client.Core.Tests.NET45</RootNamespace>
-    <AssemblyName>LogoFX.Client.Core.Tests.NET45</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>LogoFX.Client.Core.Tests.NET</RootNamespace>
+    <AssemblyName>LogoFX.Client.Core.Tests.NET</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,12 +50,6 @@
       <Link>ReentranceGuardTests.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LogoFX.Client.Core\net45\LogoFX.Client.Core.NET45.csproj">
-      <Project>{7e1fdd31-2f08-4b15-a8c9-6adbbb80f21a}</Project>
-      <Name>LogoFX.Client.Core.NET45</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
