@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2010
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Core.Platform.UWP", "LogoFX.Client.Core.Platform\uwp\LogoFX.Client.Core.Platform.UWP.csproj", "{11FF7F23-9E17-48A8-9F8F-C3C65E4F7C7E}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Core.Tests.NETStandard13", "LogoFX.Client.Core.Tests.NETStandard13\LogoFX.Client.Core.Tests.NETStandard13.csproj", "{B8F2EF57-6E13-4167-8C3C-A27B0523A1E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Core.Platform.NET", "LogoFX.Client.Core.Platform\net\LogoFX.Client.Core.Platform.NET.csproj", "{27C2028A-1934-447F-953D-A6E2CB2851E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Core.Platform.Android", "LogoFX.Client.Core.Platform\android\LogoFX.Client.Core.Platform.Android.csproj", "{D904CB92-81F0-4336-825E-84C7A58F3F38}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogoFX.Client.Core.Platform.iOS", "LogoFX.Client.Core.Platform\iOS\LogoFX.Client.Core.Platform.iOS.csproj", "{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -125,6 +129,38 @@ Global
 		{27C2028A-1934-447F-953D-A6E2CB2851E1}.Release|x64.Build.0 = Release|Any CPU
 		{27C2028A-1934-447F-953D-A6E2CB2851E1}.Release|x86.ActiveCfg = Release|Any CPU
 		{27C2028A-1934-447F-953D-A6E2CB2851E1}.Release|x86.Build.0 = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|x64.Build.0 = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Debug|x86.Build.0 = Debug|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|ARM.Build.0 = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|x64.ActiveCfg = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|x64.Build.0 = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|x86.ActiveCfg = Release|Any CPU
+		{D904CB92-81F0-4336-825E-84C7A58F3F38}.Release|x86.Build.0 = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|ARM.Build.0 = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|x64.Build.0 = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Debug|x86.Build.0 = Debug|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|ARM.ActiveCfg = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|ARM.Build.0 = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|x64.ActiveCfg = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|x64.Build.0 = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|x86.ActiveCfg = Release|Any CPU
+		{67E8A8BC-989A-4E96-B2D1-D2FE67D50893}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
