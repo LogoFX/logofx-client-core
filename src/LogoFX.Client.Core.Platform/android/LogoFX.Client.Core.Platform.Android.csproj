@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LogoFX.Client.Core.Platform.Android</RootNamespace>
-    <AssemblyName>LogoFX.Client.Core.Platform.Android</AssemblyName>
+    <AssemblyName>LogoFX.Client.Core.Platform</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
