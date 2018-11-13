@@ -53,9 +53,9 @@
     <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\LogoFX.Client.Core\netstandard2.0\LogoFX.Client.Core.NETStandard20.csproj">
-      <Project>{9C31B68B-EAA6-4E8B-BC2D-027187CDFBB4}</Project>
-      <Name>LogoFX.Client.Core.NETStandard20</Name>
+    <ProjectReference Include="..\..\LogoFX.Client.Core\LogoFX.Client.Core.csproj">
+      <Project>{9ed9b1e9-4838-4a69-a47d-5d69853f4a1e}</Project>
+      <Name>LogoFX.Client.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
