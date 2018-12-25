@@ -44,7 +44,7 @@ namespace System.Windows.Threading
 #endif                    
             _dispatch = (action, @async, prio) =>
             {
-#if NET45
+#if NET
                 if (!@async && dispatcher.CheckAccess())
 #else
                 if (!@async)
