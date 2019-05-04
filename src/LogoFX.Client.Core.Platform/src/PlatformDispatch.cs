@@ -2,10 +2,14 @@
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 #endif
+#if NET
+using System.Windows.Threading;
+#endif
+
 using LogoFX.Client.Core;
 
 // ReSharper disable once CheckNamespace
-namespace System.Windows.Threading
+namespace System.Threading
 {    
     /// <summary>
     /// Default UI-thread dispatcher

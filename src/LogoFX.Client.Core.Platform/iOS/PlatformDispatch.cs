@@ -3,7 +3,7 @@ using Foundation;
 using UIKit;
 
 // ReSharper disable once CheckNamespace
-namespace System.Windows.Threading
+namespace System.Threading
 {
     /// <inheritdoc /> 
     public class PlatformDispatch : IDispatch

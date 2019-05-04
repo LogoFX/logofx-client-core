@@ -1,5 +1,5 @@
  // ReSharper disable once CheckNamespace
-namespace System.Windows.Threading
+namespace System.Threading
 {
     /// <summary>
     /// Represents UI-thread dispatcher

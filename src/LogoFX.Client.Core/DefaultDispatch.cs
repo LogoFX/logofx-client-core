@@ -1,33 +1,26 @@
 ﻿using System.Threading.Tasks;
+
 // ReSharper disable once CheckNamespace
-namespace System.Windows.Threading
+namespace System.Threading
 {    
     /// <summary>
-    /// Default UI-thread dispatcher
+    /// Default implementation of <see cref="IDispatch"/>
     /// </summary>
     public class DefaultDispatch : IDispatch
     {
-        /// <summary>
-        /// Begins the action on the UI thread
-        /// </summary>
-        /// <param name="action">Action</param>
+        /// <inheritdoc />
         public void BeginOnUiThread(Action action)
         {
             Task.Run(action);
         }
 
-        /// <summary>
-        /// Executes the action on the UI thread
-        /// </summary>
-        /// <param name="action">Action</param>
+        /// <inheritdoc />
         public void OnUiThread(Action action)
         {
             action();
         }
 
-        /// <summary>
-        /// Initializes the dispatcher
-        /// </summary>
+        /// <inheritdoc />
         public void InitializeDispatch()
         {
             

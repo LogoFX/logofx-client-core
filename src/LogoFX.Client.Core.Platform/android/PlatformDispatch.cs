@@ -1,9 +1,8 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
 
 // ReSharper disable once CheckNamespace
-namespace System.Windows.Threading
+namespace System.Threading
 {
     /// <inheritdoc /> 
     public class PlatformDispatch : IDispatch
