@@ -7,7 +7,7 @@ namespace System.Windows.Threading
     public interface IDispatch
     {
         /// <summary>
-        /// Begins the action on the UI thread
+        /// Executes the action on the UI thread asynchronously
         /// </summary>
         /// <param name="action">Action</param>
         void BeginOnUiThread(Action action);      

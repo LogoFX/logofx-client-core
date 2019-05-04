@@ -20,39 +20,29 @@ namespace LogoFX.Client.Core
             public Raiser(ReentranceGuard owner)
             {
                 _reentranceGuard = owner;
-                _reentranceGuard._counter++;
+                _reentranceGuard.Counter++;
             }
-            /// <summary>
-            /// Disposes locked application resources.
-            /// </summary>
+            /// <inheritdoc />            
             public void Dispose()
             {
-                _reentranceGuard._counter--;
+                _reentranceGuard.Counter--;
             }
         }
 
-        private int _counter = -1;
-        
         /// <summary>
         /// Gets automatic reference counter.
         /// </summary>
-        public int Counter
-        {
-            get { return _counter; }
-        }
+        public int Counter { get; private set; } = -1;
 
         /// <summary>
         /// Gets user interface lock flag based on the <see cref="Counter"/> value.
         /// </summary>
-        public bool IsLocked
-        {
-            get { return Counter > 0; }
-        }
-        
+        public bool IsLocked => Counter > 0;
+
         /// <summary>
         /// Increments the counter of the references.
         /// </summary>
-        /// <returns>The object, which decrements the reference on its disposure.</returns>
+        /// <returns>The object, which decrements the reference on its disposal.</returns>
         public IDisposable Raise()
         {
             return new Raiser(this);

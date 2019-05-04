@@ -1,9 +1,4 @@
-﻿// Partial Copyright (c) LogoUI Software Solutions LTD
-// Autor: Vladislav Spivak
-// This source file is the part of LogoFX Framework http://logofx.codeplex.com
-// See accompanying licences and credits.
-
-//note: I don't know who is responsible for writing out the most of this excellent staff
+﻿//note: I don't know who is responsible for writing out the most of this excellent staff
 //note: If you feel you are somehow involved and not mentioned in credits - let me know
 
 using System;

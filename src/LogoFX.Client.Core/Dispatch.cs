@@ -6,23 +6,14 @@ namespace System.Windows.Threading
     /// </summary>
     public static class Dispatch
     {
-        private static IDispatch _defaultDispatch = CreateDefaultDispatch();
         /// <summary>
         /// Gets or sets the current dispatcher.
         /// </summary>
         /// <value>
         /// The current.
         /// </value>
-        public static IDispatch Current
-        {
-            get { return _defaultDispatch; }
-            set { _defaultDispatch = value; }
-        }
+        public static IDispatch Current { get; set; } = CreateDefaultDispatch();
 
-        private static IDispatch CreateDefaultDispatch()
-        {
-            DefaultDispatch dispatch = new DefaultDispatch();            
-            return dispatch;
-        }
+        private static IDispatch CreateDefaultDispatch() => new DefaultDispatch();        
     }
 }
