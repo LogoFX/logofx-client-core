@@ -35,14 +35,14 @@ namespace System.Windows.Threading
         public void InitializeDispatch()
         {
 #if NET
-            Dispatcher dispatcher = Dispatcher.CurrentDispatcher;
+            var dispatcher = Dispatcher.CurrentDispatcher;
             if (dispatcher == null)
                 throw new InvalidOperationException("Dispatch is not initialized correctly");
 #endif
 #if NETFX_CORE || WINDOWS_UWP
             CoreDispatcher dispatcher = new UserControl().Dispatcher;            
 #endif                    
-            _dispatch = (action, @async, prio) =>
+            _dispatch = (action, @async, priority) =>
             {
 #if NET
                 if (!@async && dispatcher.CheckAccess())
@@ -55,19 +55,16 @@ namespace System.Windows.Threading
                 else
                 {
 #if NET
-                    dispatcher.BeginInvoke(action, prio);
+                    dispatcher.BeginInvoke(action, priority);
 #endif
 #if NETFX_CORE || WINDOWS_UWP
-                    dispatcher.RunAsync(prio, () => action());
+                    dispatcher.RunAsync(priority, () => action());
 #endif                                       
                 }
             };
         }
 
-        /// <summary>
-        /// Begins the action on the UI thread
-        /// </summary>
-        /// <param name="action">Action</param>
+        /// <inheritdoc />
         public void BeginOnUiThread(Action action)
         {
             BeginOnUiThread(Consts.DispatcherPriority, action);            
@@ -76,7 +73,7 @@ namespace System.Windows.Threading
         /// <summary>
         /// Begins the action on the UI thread according to the specified priority
         /// </summary>
-        /// <param name="prio">Desired priority</param>
+        /// <param name="priority">Desired priority</param>
         /// <param name="action">Action</param>
         public void BeginOnUiThread(
 #if NET
@@ -85,16 +82,13 @@ namespace System.Windows.Threading
 #if NETFX_CORE || WINDOWS_UWP
             CoreDispatcherPriority
 #endif
-            prio, Action action)
+            priority, Action action)
         {
             EnsureDispatch();
-            _dispatch(action, true, prio);
+            _dispatch(action, true, priority);
         }
 
-        /// <summary>
-        /// Executes the action on the UI thread
-        /// </summary>
-        /// <param name="action">Action</param>
+        /// <inheritdoc />
         public void OnUiThread(Action action)
         {
             OnUiThread(Consts.DispatcherPriority, action);
