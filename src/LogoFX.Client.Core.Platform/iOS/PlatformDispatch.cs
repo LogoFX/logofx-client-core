@@ -5,7 +5,9 @@ using UIKit;
 // ReSharper disable once CheckNamespace
 namespace System.Threading
 {
-    /// <inheritdoc /> 
+    /// <summary>
+    /// Platform-specific dispatcher
+    /// </summary>
     public class PlatformDispatch : IDispatch
     {
         /// <inheritdoc /> 

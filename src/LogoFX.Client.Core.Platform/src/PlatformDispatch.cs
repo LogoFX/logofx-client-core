@@ -12,7 +12,7 @@ using LogoFX.Client.Core;
 namespace System.Threading
 {    
     /// <summary>
-    /// Default UI-thread dispatcher
+    /// Platform-specific dispatcher
     /// </summary>
     public class PlatformDispatch : IDispatch
     {
