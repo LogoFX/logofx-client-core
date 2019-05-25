@@ -109,28 +109,19 @@ namespace LogoFX.Client.Core
                 _propertyChanged.Raise((TObject)this);
         }
 
-        /// <summary>
-        /// Push notification suppression
-        /// </summary>
-        IDisposable ISuppressNotify.SuppressNotify
-        {
-            get { return SuppressNotify; }
-        }
+        IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 
         /// <summary>
         /// Gets the suppress notify.
         /// </summary>
         /// <remarks>use this in <see langword="using"></see> statement</remarks>
         /// <value>The suppress notify.</value>
-        protected IDisposable SuppressNotify
-        {
-            get { return new SuppressNotifyHelper<TObject>(this); }
-        }
+        protected IDisposable SuppressNotify => new SuppressNotifyHelper<TObject>(this);
 
         private bool _suppressNotify;
 
         /// <summary>
-        /// Helper for notification supression
+        /// Helper for notification suppression
         /// </summary>
         /// <typeparam name="T"></typeparam>
         class SuppressNotifyHelper<T> : IDisposable where T : NotifyPropertyChangedBase<T>
