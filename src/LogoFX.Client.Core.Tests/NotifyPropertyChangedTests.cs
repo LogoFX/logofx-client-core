@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
-using NUnit.Framework;
+using FluentAssertions;
+using Xunit;
 
 namespace LogoFX.Client.Core.Tests
 {
-    abstract class TestClassBase : NotifyPropertyChangedBase<TestClassBase>
+    public abstract class TestClassBase : NotifyPropertyChangedBase<TestClassBase>
     {        
         public abstract int Number { get;
             set;
@@ -24,7 +26,7 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
-    class TestNameClass : TestClassBase
+    public class TestNameClass : TestClassBase
     {
         public override int Number
         {
@@ -36,7 +38,7 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
-    class TestPropertyInfoClass : TestClassBase
+    public class TestPropertyInfoClass : TestClassBase
     {
         private readonly PropertyInfo _propertyInfo;
 
@@ -55,7 +57,7 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
-    class TestExpressionClass : TestClassBase
+    public class TestExpressionClass : TestClassBase
     {
         public override int Number
         {
@@ -67,14 +69,13 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
-    [TestFixture]
-    class NotifyPropertyChangedTests
+    public class NotifyPropertyChangedTests
     {
-        [Test]
-        [TestCaseSource("NpcIsRaisedCases")]
+        [Theory]
+        [MemberData(nameof(NpcIsRaisedCases))]
         public void PropertyChanged_PropertyValueIsChanged_NotificationIsRaisedIsTrue(
             TestClassBase testClass, bool expectedIsCalled)
-        {            
+        {
             bool isCalled = false;
             testClass.PropertyChanged += (sender, args) =>
             {
@@ -83,14 +84,14 @@ namespace LogoFX.Client.Core.Tests
                     isCalled = true;
                 }
             };
-                
+
             testClass.Number = 5;
 
-            Assert.AreEqual(expectedIsCalled, isCalled);
+            isCalled.Should().Be(expectedIsCalled);
         }
 
-        [Test]
-        [TestCaseSource("NpcIsNotRaisedCases")]
+        [Theory]
+        [MemberData(nameof(NpcIsNotRaisedCases))]
         public void PropertyChanged_PropertyValueIsChanged_NotificationIsRaised(
             TestClassBase testClass, bool expectedIsCalled)
         {
@@ -105,13 +106,13 @@ namespace LogoFX.Client.Core.Tests
 
             testClass.UpdateSilent(() =>
             {
-                testClass.Number = 5;    
+                testClass.Number = 5;
             });
-            
-            Assert.AreEqual(expectedIsCalled, isCalled);
+
+            isCalled.Should().Be(expectedIsCalled);
         }
 
-        [Test]
+        [Fact]
         public void PropertyChanged_NotifyOfPropertiesChangeIsInvoked_EmptyNotificationIsRaised()
         {
             var testClass = new TestNameClass();
@@ -126,21 +127,23 @@ namespace LogoFX.Client.Core.Tests
 
             testClass.Refresh();
 
-            Assert.IsTrue(isCalled);
+            isCalled.Should().BeTrue();
         }
 
-        private static readonly object[] NpcIsRaisedCases =
-        {
-            new object[] {new TestNameClass(), true},
-            new object[] {new TestPropertyInfoClass(), true},            
-            new object[] {new TestExpressionClass(), true}
-        };
+        public static readonly IEnumerable<object[]> NpcIsRaisedCases =
+            new List<object[]>
+            {
+                new object[] {new TestNameClass(), true},
+                new object[] {new TestPropertyInfoClass(), true},
+                new object[] {new TestExpressionClass(), true}
+            };
 
-        private static readonly object[] NpcIsNotRaisedCases =
-        {
-            new object[] {new TestNameClass(), false},
-            new object[] {new TestPropertyInfoClass(), false},            
-            new object[] {new TestExpressionClass(), false}
-        };
+        public static readonly IEnumerable<object[]> NpcIsNotRaisedCases =
+            new List<object[]>
+            {
+                new object[] {new TestNameClass(), false},
+                new object[] {new TestPropertyInfoClass(), false},
+                new object[] {new TestExpressionClass(), false}
+            };
     }
 }

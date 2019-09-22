@@ -1,21 +1,22 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace LogoFX.Client.Core.Tests
 {
-    [TestFixture]
     public class ReentranceGuardTests
     {
-        [Test]
+        [Fact]
         public void AccessingSemaphore_SemaphoreIsRaisedOnce_IsLockedIsFalse()
         {
             var guard = new ReentranceGuard();
             guard.Raise();
 
             var isLocked = guard.IsLocked;
-            Assert.IsFalse(isLocked);
+
+            isLocked.Should().BeFalse();
         }
 
-        [Test]
+        [Fact]
         public void AccessingSemaphore_SemaphoreIsRaisedTwice_IsLockedIsTrue()
         {
             var guard = new ReentranceGuard();
@@ -23,10 +24,11 @@ namespace LogoFX.Client.Core.Tests
             guard.Raise();
 
             var isLocked = guard.IsLocked;
-            Assert.IsTrue(isLocked);
+
+            isLocked.Should().BeTrue();
         }
 
-        [Test]
+        [Fact]
         public void AccessingSemaphore_SemaphoreIsRaisedTrice_IsLockedIsTrue()
         {
             var guard = new ReentranceGuard();
@@ -35,10 +37,11 @@ namespace LogoFX.Client.Core.Tests
             guard.Raise();
 
             var isLocked = guard.IsLocked;
-            Assert.IsTrue(isLocked);
+
+            isLocked.Should().BeTrue();
         }
 
-        [Test]
+        [Fact]
         public void AccessingSemaphore_SemaphoreIsRaisedTwiceThenDisposeCalled_IsLockedIsFalse()
         {
             var guard = new ReentranceGuard();
@@ -49,7 +52,8 @@ namespace LogoFX.Client.Core.Tests
             }
 
             var isLocked = guard.IsLocked;
-            Assert.IsFalse(isLocked);
+
+            isLocked.Should().BeFalse();
         }
     }
 }
