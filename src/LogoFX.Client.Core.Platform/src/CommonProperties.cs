@@ -1,4 +1,4 @@
-﻿#if NET
+﻿#if NET || NETCORE
 using System.Windows;
 #endif
 #if NETFX_CORE || WINDOWS_UWP

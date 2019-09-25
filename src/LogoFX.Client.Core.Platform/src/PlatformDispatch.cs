@@ -2,7 +2,7 @@
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 #endif
-#if NET
+#if NET || NETCORE
 using System.Windows.Threading;
 #endif
 
@@ -17,7 +17,7 @@ namespace System.Threading
     public class PlatformDispatch : IDispatch
     {
         private Action<Action, bool,
-#if NET
+#if NET || NETCORE
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -38,7 +38,7 @@ namespace System.Threading
         /// </summary>
         public void InitializeDispatch()
         {
-#if NET
+#if NET || NETCORE
             var dispatcher = Dispatcher.CurrentDispatcher;
             if (dispatcher == null)
                 throw new InvalidOperationException("Dispatch is not initialized correctly");
@@ -48,7 +48,7 @@ namespace System.Threading
 #endif                    
             _dispatch = (action, @async, priority) =>
             {
-#if NET
+#if NET || NETCORE
                 if (!@async && dispatcher.CheckAccess())
 #else
                 if (!@async)
@@ -58,7 +58,7 @@ namespace System.Threading
                 }               
                 else
                 {
-#if NET
+#if NET || NETCORE
                     dispatcher.BeginInvoke(action, priority);
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -80,7 +80,7 @@ namespace System.Threading
         /// <param name="priority">Desired priority</param>
         /// <param name="action">Action</param>
         public void BeginOnUiThread(
-#if NET
+#if NET || NETCORE
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP
@@ -104,7 +104,7 @@ namespace System.Threading
         /// <param name="priority">Desired priority</param>
         /// <param name="action">Action</param>
         public void OnUiThread(
-#if NET
+#if NET || NETCORE
             DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP

@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("LogoFX.Client.Core.Platform.Resource", IsApplication=false)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("LogoFX.Client.Core.Resource", IsApplication=false)]
 
-namespace LogoFX.Client.Core.Platform
+namespace LogoFX.Client.Core
 {
 	
 	
