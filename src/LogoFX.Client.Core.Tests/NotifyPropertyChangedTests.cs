@@ -38,6 +38,16 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
+    public class TestRegularClass : NotifyPropertyChangedBase<TestRegularClass>
+    {
+        private int _number;
+        public int Number
+        {
+            get => _number;
+            set => SetProperty(ref _number, value);
+        }
+    }
+
     public class TestPropertyInfoClass : TestClassBase
     {
         private readonly PropertyInfo _propertyInfo;
@@ -127,6 +137,25 @@ namespace LogoFX.Client.Core.Tests
 
             testClass.Refresh();
 
+            isCalled.Should().BeTrue();
+        }
+
+        [Fact]
+        public void SetProperty_ValueIsDifferent_NotificationIsRaised()
+        {
+            var testClass = new TestRegularClass();
+            bool isCalled = false;
+            testClass.PropertyChanged += (sender, args) => 
+            {
+                if (args.PropertyName == "Number")
+                {
+                    isCalled = true;
+                }
+            };
+
+            testClass.Number = 5;
+
+            testClass.Number.Should().Be(5);
             isCalled.Should().BeTrue();
         }
 

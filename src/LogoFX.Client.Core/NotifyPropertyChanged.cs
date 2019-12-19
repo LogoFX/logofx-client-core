@@ -109,6 +109,28 @@ namespace LogoFX.Client.Core
                 _propertyChanged.Raise((TObject)this);
         }
 
+        /// <summary>
+        /// Compares the current and new values. If they are different,
+        /// updates the respective field 
+        /// and fires the property change notification.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="currentValue">The current value field reference.</param>
+        /// <param name="newValue">The new value.</param>
+        /// <param name="name">The property name.</param>        
+        protected void SetProperty<TProperty>(
+            ref TProperty currentValue, 
+            TProperty newValue, 
+            [CallerMemberName] string name = "")
+        {
+            if (Equals(currentValue, newValue))
+            {
+                return;
+            }                    
+            currentValue = newValue;
+            NotifyOfPropertyChange(name);
+        }
+
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 
         /// <summary>
