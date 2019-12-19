@@ -13,14 +13,14 @@ namespace LogoFX.Client.Core
         /// The dispatcher priority
         /// </summary>
         public const
-#if NET
+#if NET || NETCORE
             System.Windows.Threading.DispatcherPriority
 #endif
 #if NETFX_CORE || WINDOWS_UWP
             CoreDispatcherPriority
 #endif
             DispatcherPriority =
-#if NET
+#if NET || NETCORE
             System.Windows.Threading.DispatcherPriority.DataBind
 #endif
 #if NETFX_CORE || WINDOWS_UWP
