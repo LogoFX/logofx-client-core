@@ -109,6 +109,32 @@ namespace LogoFX.Client.Core
                 _propertyChanged.Raise((TObject)this);
         }
 
+        /// <summary>
+        /// Compares the current and new values. If they are different,
+        /// updates the respective field 
+        /// and fires the property change notification.
+        /// </summary>
+        /// <typeparam name="TProperty">The type of the property.</typeparam>
+        /// <param name="currentValue">The current value field reference.</param>
+        /// <param name="newValue">The new value.</param>
+        /// <param name="name">The property name.</param>
+        /// <param name="options">The set property options.</param>        
+        protected void SetProperty<TProperty>(
+            ref TProperty currentValue,
+            TProperty newValue,
+            [CallerMemberName] string name = "",
+            SetPropertyOptions options = null)
+        {
+            if (Equals(currentValue, newValue))
+            {
+                return;
+            }
+            options?.BeforeValueUpdate?.Invoke();
+            currentValue = newValue;
+            NotifyOfPropertyChange(name);
+            options?.AfterValueUpdate?.Invoke();
+        }
+
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 
         /// <summary>
@@ -517,4 +543,20 @@ namespace LogoFX.Client.Core
     }
 
     #endregion
+
+    /// <summary>
+    /// Set property options. Use this to inject functionality on property value update.
+    /// </summary>
+    public class SetPropertyOptions
+    {
+        /// <summary>
+        /// Invoked before a property value is updated.
+        /// </summary>
+        public Action BeforeValueUpdate { get; set; }
+
+        /// <summary>
+        /// Invoked after a property value is updated.
+        /// </summary>
+        public Action AfterValueUpdate { get; set; }
+    }
 }
