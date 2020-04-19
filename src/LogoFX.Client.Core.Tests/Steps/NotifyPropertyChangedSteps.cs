@@ -49,7 +49,7 @@ namespace LogoFX.Client.Core.Tests
             if (@class != null)
             {
                 _scenarioContext.Add("class", @class);
-                var isCallRefCollection = new List<WeakReference>();
+                var isCallRefCollection = new List<ValueWrapper>();
                 var isQuantityCalledRef = ListenToPropertyChange(@class, "Quantity");
                 isCallRefCollection.Add(isQuantityCalledRef);
                 var isTotalCalledRef = ListenToPropertyChange(@class, "Total");
@@ -65,15 +65,15 @@ namespace LogoFX.Client.Core.Tests
             return type == null ? null : Activator.CreateInstance(type) as INotifyPropertyChanged;
         }
 
-        private WeakReference ListenToPropertyChange(INotifyPropertyChanged @class, string propertyName)
+        private ValueWrapper ListenToPropertyChange(INotifyPropertyChanged @class, string propertyName)
         {
             var isCalled = false;
-            var isCalledRef = new WeakReference(isCalled);
+            var isCalledRef = new ValueWrapper(isCalled);
             @class.PropertyChanged += (sender, args) =>
             {
                 if (args.PropertyName == propertyName)
                 {
-                    isCalledRef.Target = true;
+                    isCalledRef.Value = true;
                 }
             };
             return isCalledRef;
@@ -121,16 +121,16 @@ namespace LogoFX.Client.Core.Tests
         public void ThenThePropertyChangeNotificationResultIs(string expectedResultStr)
         {
             bool.TryParse(expectedResultStr, out var expectedResult);
-            var isCalledRef = _scenarioContext.Get<WeakReference>("isCalledRef");
-            isCalledRef.Target.Should().Be(expectedResult);
+            var isCalledRef = _scenarioContext.Get<ValueWrapper>("isCalledRef");
+            isCalledRef.Value.Should().Be(expectedResult);
         }
 
         [Then(@"The property change notification result is '(.*)' for all notifications")]
         public void ThenThePropertyChangeNotificationResultIsForAllNotifications(string expectedResultStr)
         {
             bool.TryParse(expectedResultStr, out var expectedResult);
-            var isCalledRefCollection = _scenarioContext.Get<IEnumerable<WeakReference>>("isCalledRefCollection");
-            isCalledRefCollection.Select(t => t.Target).Should().AllBeEquivalentTo(expectedResult);
+            var isCalledRefCollection = _scenarioContext.Get<IEnumerable<ValueWrapper>>("isCalledRefCollection");
+            isCalledRefCollection.Select(t => t.Value).Should().AllBeEquivalentTo(expectedResult);
         }
     }
 }

@@ -24,12 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Notify Property Changed.feature.cs">
+    <Compile Update="Specs\Notify Property Changed.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Notify Property Changed.feature</DependentUpon>
     </Compile>
-    <Compile Update="Semaphore.feature.cs">
+    <Compile Update="Specs\Semaphore.feature.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Semaphore.feature</DependentUpon>

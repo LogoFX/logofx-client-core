@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace LogoFX.Client.Core.Tests
+namespace LogoFX.Client.Core.Tests.Specs
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace LogoFX.Client.Core.Tests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class NotifyPropertyChangedFeature : object, Xunit.IClassFixture<NotifyPropertyChangedFeature.FixtureData>, System.IDisposable
+    public partial class SemaphoreFeature : object, Xunit.IClassFixture<SemaphoreFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace LogoFX.Client.Core.Tests
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "Notify Property Changed.feature"
+#line 1 "Semaphore.feature"
 #line hidden
         
-        public NotifyPropertyChangedFeature(NotifyPropertyChangedFeature.FixtureData fixtureData, LogoFX_Client_Core_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public SemaphoreFeature(SemaphoreFeature.FixtureData fixtureData, LogoFX_Client_Core_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace LogoFX.Client.Core.Tests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Notify Property Changed", "\tIn order to have reactive user interface\r\n\tAs an app developer\r\n\tI want the fram" +
-                    "ework to handle property notifications properly", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Semaphore", "\tIn order to be able to develop concurrent apps\r\n\tAs an app developer\r\n\tI want th" +
+                    "e framework to provide semaphore functionality", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,16 +81,16 @@ namespace LogoFX.Client.Core.Tests
             this.TestTearDown();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in regular mode should raise property change notification")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
-        [Xunit.TraitAttribute("Description", "Single property change in regular mode should raise property change notification")]
-        [Xunit.InlineDataAttribute("TestNameClass", "true", new string[0])]
-        [Xunit.InlineDataAttribute("TestPropertyInfoClass", "true", new string[0])]
-        [Xunit.InlineDataAttribute("TestExpressionClass", "true", new string[0])]
-        public virtual void SinglePropertyChangeInRegularModeShouldRaisePropertyChangeNotification(string name, string result, string[] exampleTags)
+        [Xunit.SkippableFactAttribute(DisplayName="Accessing semaphore after is has been raised once should result in not locked sta" +
+            "te")]
+        [Xunit.TraitAttribute("FeatureTitle", "Semaphore")]
+        [Xunit.TraitAttribute("Description", "Accessing semaphore after is has been raised once should result in not locked sta" +
+            "te")]
+        public virtual void AccessingSemaphoreAfterIsHasBeenRaisedOnceShouldResultInNotLockedState()
         {
-            string[] tagsOfScenario = exampleTags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single property change in regular mode should raise property change notification", null, exampleTags);
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Accessing semaphore after is has been raised once should result in not locked sta" +
+                    "te", null, ((string[])(null)));
 #line 6
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -112,31 +112,71 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 7
- testRunner.When(string.Format("The \'{0}\' is created", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("The semaphore is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 8
- testRunner.And("The number is changed to 5  in regular mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 9
- testRunner.Then(string.Format("The property change notification result is \'{0}\'", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The semaphore should not be locked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in silent mode should not raise property change notificati" +
-            "on")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
-        [Xunit.TraitAttribute("Description", "Single property change in silent mode should not raise property change notificati" +
-            "on")]
-        [Xunit.InlineDataAttribute("TestNameClass", "false", new string[0])]
-        [Xunit.InlineDataAttribute("TestPropertyInfoClass", "false", new string[0])]
-        [Xunit.InlineDataAttribute("TestExpressionClass", "false", new string[0])]
-        public virtual void SinglePropertyChangeInSilentModeShouldNotRaisePropertyChangeNotification(string name, string result, string[] exampleTags)
+        [Xunit.SkippableFactAttribute(DisplayName="Accessing semaphore after is has been raised twice should result in locked state")]
+        [Xunit.TraitAttribute("FeatureTitle", "Semaphore")]
+        [Xunit.TraitAttribute("Description", "Accessing semaphore after is has been raised twice should result in locked state")]
+        public virtual void AccessingSemaphoreAfterIsHasBeenRaisedTwiceShouldResultInLockedState()
         {
-            string[] tagsOfScenario = exampleTags;
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single property change in silent mode should not raise property change notificati" +
-                    "on", null, exampleTags);
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Accessing semaphore after is has been raised twice should result in locked state", null, ((string[])(null)));
+#line 11
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 12
+ testRunner.When("The semaphore is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 13
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 14
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 15
+ testRunner.Then("The semaphore should be locked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Accessing semaphore after is has been raised three times should result in locked " +
+            "state")]
+        [Xunit.TraitAttribute("FeatureTitle", "Semaphore")]
+        [Xunit.TraitAttribute("Description", "Accessing semaphore after is has been raised three times should result in locked " +
+            "state")]
+        public virtual void AccessingSemaphoreAfterIsHasBeenRaisedThreeTimesShouldResultInLockedState()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Accessing semaphore after is has been raised three times should result in locked " +
+                    "state", null, ((string[])(null)));
 #line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -158,69 +198,81 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 18
- testRunner.When(string.Format("The \'{0}\' is created", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("The semaphore is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 19
- testRunner.And("The number is changed to 5 in silent mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 20
- testRunner.Then(string.Format("The property change notification result is \'{0}\'", result), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 21
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 22
+ testRunner.Then("The semaphore should be locked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Invoking all properties change should raise empty property change notification")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
-        [Xunit.TraitAttribute("Description", "Invoking all properties change should raise empty property change notification")]
-        public virtual void InvokingAllPropertiesChangeShouldRaiseEmptyPropertyChangeNotification()
+        [Xunit.SkippableFactAttribute(DisplayName="Accessing semaphore after is has been raised twice and disposed should result in " +
+            "not locked state")]
+        [Xunit.TraitAttribute("FeatureTitle", "Semaphore")]
+        [Xunit.TraitAttribute("Description", "Accessing semaphore after is has been raised twice and disposed should result in " +
+            "not locked state")]
+        public virtual void AccessingSemaphoreAfterIsHasBeenRaisedTwiceAndDisposedShouldResultInNotLockedState()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invoking all properties change should raise empty property change notification", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Accessing semaphore after is has been raised twice and disposed should result in " +
+                    "not locked state", null, ((string[])(null)));
+#line 24
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 25
+ testRunner.When("The semaphore is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 26
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 27
+ testRunner.And("The semaphore is raised and disposed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 28
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 29
- testRunner.When("The \'TestNameClass\' is created and empty notification is listened to", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 30
- testRunner.And("The all properties change is invoked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 31
- testRunner.Then("The property change notification result is \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The semaphore should not be locked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Changing single property via SetProperty API should raise property change notific" +
-            "ation")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
-        [Xunit.TraitAttribute("Description", "Changing single property via SetProperty API should raise property change notific" +
-            "ation")]
-        public virtual void ChangingSinglePropertyViaSetPropertyAPIShouldRaisePropertyChangeNotification()
+        [Xunit.SkippableFactAttribute(DisplayName="Accessing semaphore after is has been raised three times and disposed should resu" +
+            "lt in locked state")]
+        [Xunit.TraitAttribute("FeatureTitle", "Semaphore")]
+        [Xunit.TraitAttribute("Description", "Accessing semaphore after is has been raised three times and disposed should resu" +
+            "lt in locked state")]
+        public virtual void AccessingSemaphoreAfterIsHasBeenRaisedThreeTimesAndDisposedShouldResultInLockedState()
         {
             string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property via SetProperty API should raise property change notific" +
-                    "ation", null, ((string[])(null)));
-#line 33
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Accessing semaphore after is has been raised three times and disposed should resu" +
+                    "lt in locked state", null, ((string[])(null)));
+#line 30
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -240,57 +292,20 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
+#line 31
+ testRunner.When("The semaphore is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 33
+ testRunner.And("The semaphore is raised", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
 #line 34
- testRunner.When("The \'TestRegularClass\' is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("The semaphore is raised and disposed", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 35
- testRunner.And("The number is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 36
- testRunner.Then("The property change notification result is \'true\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Changing single property with multiple notifications via SetProperty API should r" +
-            "aise all property change notifications")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
-        [Xunit.TraitAttribute("Description", "Changing single property with multiple notifications via SetProperty API should r" +
-            "aise all property change notifications")]
-        public virtual void ChangingSinglePropertyWithMultipleNotificationsViaSetPropertyAPIShouldRaiseAllPropertyChangeNotifications()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property with multiple notifications via SetProperty API should r" +
-                    "aise all property change notifications", null, ((string[])(null)));
-#line 38
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 39
- testRunner.When("The \'TestMultipleClass\' is created and all notifications are listened to", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 40
- testRunner.And("The quantity is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 41
- testRunner.Then("The property change notification result is \'true\' for all notifications", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("The semaphore should be locked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -303,12 +318,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                NotifyPropertyChangedFeature.FeatureSetup();
+                SemaphoreFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                NotifyPropertyChangedFeature.FeatureTearDown();
+                SemaphoreFeature.FeatureTearDown();
             }
         }
     }
