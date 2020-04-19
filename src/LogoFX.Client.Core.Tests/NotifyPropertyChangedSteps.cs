@@ -20,38 +20,92 @@ namespace LogoFX.Client.Core.Tests
         [When(@"The '(.*)' is created")]
         public void WhenTheIsCreated(string name)
         {
-            var types = Assembly.GetExecutingAssembly().DefinedTypes.ToArray();
-            var type = types.FirstOrDefault(t => t.Name == name)?.AsType();
-            if (type != null)
+            var @class = CreateTestClass(name);
+            if (@class != null)
             {
-                var @class = Activator.CreateInstance(type) as INotifyPropertyChanged;
-                var isCalled = false;
-                var isCalledRef = new WeakReference(isCalled);
-                @class.PropertyChanged += (sender, args) =>
-                {
-                    if (args.PropertyName == "Number")
-                    {
-                        isCalledRef.Target = true;
-                    }
-                };
+                var isCalledRef = ListenToPropertyChange(@class, "Number");
                 _scenarioContext.Add("class", @class);
                 _scenarioContext.Add("isCalledRef", isCalledRef);
             }
         }
 
-        [When(@"The number is changed to (.*)")]
-        public void WhenTheNumberIsChangedTo(int value)
+        [When(@"The '(.*)' is created and empty notification is listened to")]
+        public void WhenTheIsCreatedAndEmptyNotificationIsListenedTo(string name)
+        {
+            var @class = CreateTestClass(name);
+            if (@class != null)
+            {
+                var isCalledRef = ListenToPropertyChange(@class, string.Empty);
+                _scenarioContext.Add("class", @class);
+                _scenarioContext.Add("isCalledRef", isCalledRef);
+            }
+        }
+
+        private INotifyPropertyChanged CreateTestClass(string name)
+        {
+            var types = Assembly.GetExecutingAssembly().DefinedTypes.ToArray();
+            var type = types.FirstOrDefault(t => t.Name == name)?.AsType();
+            return type == null ? null : Activator.CreateInstance(type) as INotifyPropertyChanged;
+        }
+
+        private WeakReference ListenToPropertyChange(INotifyPropertyChanged @class, string propertyName)
+        {
+            var isCalled = false;
+            var isCalledRef = new WeakReference(isCalled);
+            @class.PropertyChanged += (sender, args) =>
+            {
+                if (args.PropertyName == propertyName)
+                {
+                    isCalledRef.Target = true;
+                }
+            };
+            return isCalledRef;
+        }
+
+        [When(@"The number is changed to (.*)  in regular mode")]
+        public void WhenTheNumberIsChangedToInRegularMode(int value)
         {
             var @class = _scenarioContext.Get<TestClassBase>("class");
             @class.Number = value;
         }
 
-        [Then(@"The property notification result is '(.*)'")]
-        public void ThenThePropertyNotificationResultIs(string expectedResultStr)
+        [When(@"The number is changed to (.*) in silent mode")]
+        public void WhenTheNumberIsChangedToInSilentMode(int value)
+        {
+            var @class = _scenarioContext.Get<TestClassBase>("class");
+            @class.UpdateSilent(() =>
+            {
+                @class.Number = value;
+            });
+        }
+
+        [When(@"The number is changed to (.*) via SetProperty API")]
+        public void WhenTheNumberIsChangedToViaSetPropertyAPI(int value)
+        {
+            var @class = _scenarioContext.Get<TestRegularClass>("class");
+            @class.Number = value;
+        }
+
+        [When(@"The all properties change is invoked")]
+        public void WhenTheAllPropertiesChangeIsInvoked()
+        {
+            var @class = _scenarioContext.Get<TestNameClass>("class");
+            @class.Refresh();
+        }
+
+        [Then(@"The property change notification result is '(.*)'")]
+        public void ThenThePropertyChangeNotificationResultIs(string expectedResultStr)
         {
             bool.TryParse(expectedResultStr, out var expectedResult);
             var isCalledRef = _scenarioContext.Get<WeakReference>("isCalledRef");
             isCalledRef.Target.Should().Be(expectedResult);
         }
+
+        [Then(@"The empty property change notification is raised")]
+        public void ThenTheEmptyPropertyChangeNotificationIsRaised()
+        {
+            ScenarioContext.Current.Pending();
+        }
+
     }
 }

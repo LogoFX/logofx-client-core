@@ -31,8 +31,8 @@ namespace LogoFX.Client.Core
         /// </summary>
         public event PropertyChangedEventHandler PropertyChanged
         {
-            add { _propertyChanged += value; }
-            remove { _propertyChanged -= value; }
+            add => _propertyChanged += value;
+            remove => _propertyChanged -= value;
         }
 
         /// <summary>
@@ -244,10 +244,7 @@ namespace LogoFX.Client.Core
             TObject sender,
             Expression<Func<TObject, TProperty>> expression)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(sender.GetPropertyName(expression)));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs(sender.GetPropertyName(expression)));
         }
 
         /// <summary>
@@ -263,10 +260,7 @@ namespace LogoFX.Client.Core
             TObject sender,
             Expression<Func<TProperty>> expression)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(sender.GetPropertyName(expression)));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs(sender.GetPropertyName(expression)));
         }
 
         /// <summary>
@@ -279,12 +273,9 @@ namespace LogoFX.Client.Core
         public static void Raise<TObject>(
             this PropertyChangedEventHandler handler,
             TObject sender,
-           string name)
+            string name)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(name));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs(name));
         }
 
         /// <summary>
@@ -299,10 +290,7 @@ namespace LogoFX.Client.Core
             TObject sender,
             PropertyInfo info)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(info.Name));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs(info.Name));
         }
 
         /// <summary>
@@ -315,10 +303,7 @@ namespace LogoFX.Client.Core
             this PropertyChangedEventHandler handler,
             TObject sender)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs(""));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs(string.Empty));
         }
 
         /// <summary>
@@ -328,10 +313,7 @@ namespace LogoFX.Client.Core
         /// <param name="sender">The object raising this event.</param>
         public static void RaiseItems(this PropertyChangedEventHandler handler, object sender)
         {
-            if (handler != null)
-            {
-                handler(sender, new PropertyChangedEventArgs("Items[]"));
-            }
+            handler?.Invoke(sender, new PropertyChangedEventArgs("Items[]"));
         }
     }
 
