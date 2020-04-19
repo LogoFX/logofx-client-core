@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -38,6 +39,22 @@ namespace LogoFX.Client.Core.Tests
                 var isCalledRef = ListenToPropertyChange(@class, string.Empty);
                 _scenarioContext.Add("class", @class);
                 _scenarioContext.Add("isCalledRef", isCalledRef);
+            }
+        }
+
+        [When(@"The '(.*)' is created and all notifications are listened to")]
+        public void WhenTheIsCreatedAndAllNotificationsAreListenedTo(string name)
+        {
+            var @class = CreateTestClass(name);
+            if (@class != null)
+            {
+                _scenarioContext.Add("class", @class);
+                var isCallRefCollection = new List<WeakReference>();
+                var isQuantityCalledRef = ListenToPropertyChange(@class, "Quantity");
+                isCallRefCollection.Add(isQuantityCalledRef);
+                var isTotalCalledRef = ListenToPropertyChange(@class, "Total");
+                isCallRefCollection.Add(isTotalCalledRef);
+                _scenarioContext.Add("isCalledRefCollection", isCallRefCollection);
             }
         }
 
@@ -86,6 +103,13 @@ namespace LogoFX.Client.Core.Tests
             @class.Number = value;
         }
 
+        [When(@"The quantity is changed to (.*) via SetProperty API")]
+        public void WhenTheQuantityIsChangedToViaSetPropertyAPI(int value)
+        {
+            var @class = _scenarioContext.Get<TestMultipleClass>("class");
+            @class.Quantity = value;
+        }
+
         [When(@"The all properties change is invoked")]
         public void WhenTheAllPropertiesChangeIsInvoked()
         {
@@ -101,11 +125,12 @@ namespace LogoFX.Client.Core.Tests
             isCalledRef.Target.Should().Be(expectedResult);
         }
 
-        [Then(@"The empty property change notification is raised")]
-        public void ThenTheEmptyPropertyChangeNotificationIsRaised()
+        [Then(@"The property change notification result is '(.*)' for all notifications")]
+        public void ThenThePropertyChangeNotificationResultIsForAllNotifications(string expectedResultStr)
         {
-            ScenarioContext.Current.Pending();
+            bool.TryParse(expectedResultStr, out var expectedResult);
+            var isCalledRefCollection = _scenarioContext.Get<IEnumerable<WeakReference>>("isCalledRefCollection");
+            isCalledRefCollection.Select(t => t.Target).Should().AllBeEquivalentTo(expectedResult);
         }
-
     }
 }

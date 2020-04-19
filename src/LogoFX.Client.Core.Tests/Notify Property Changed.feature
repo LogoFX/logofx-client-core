@@ -35,3 +35,8 @@ Scenario: Changing single property via SetProperty API should raise property cha
 	And The number is changed to 5 via SetProperty API
 	Then The property change notification result is 'true'
 
+Scenario: Changing single property with multiple notifications via SetProperty API should raise all property change notifications
+	When The 'TestMultipleClass' is created and all notifications are listened to
+	And The quantity is changed to 5 via SetProperty API
+	Then The property change notification result is 'true' for all notifications
+

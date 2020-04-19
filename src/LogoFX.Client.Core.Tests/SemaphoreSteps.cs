@@ -37,7 +37,6 @@ namespace LogoFX.Client.Core.Tests
             }
         }
 
-
         [Then(@"The semaphore should not be locked")]
         public void ThenTheSemaphoreShouldNotBeLocked()
         {

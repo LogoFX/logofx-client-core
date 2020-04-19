@@ -122,8 +122,8 @@ namespace LogoFX.Client.Core
         protected void SetProperty<TProperty>(
             ref TProperty currentValue,
             TProperty newValue,
-            [CallerMemberName] string name = "",
-            SetPropertyOptions options = null)
+            SetPropertyOptions options = null,
+            [CallerMemberName] string name = "")
         {
             if (Equals(currentValue, newValue))
             {
