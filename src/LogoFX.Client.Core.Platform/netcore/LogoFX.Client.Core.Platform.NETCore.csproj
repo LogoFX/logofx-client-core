@@ -15,6 +15,10 @@
     <DefineConstants>TRACE;NETCORE</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;NETCORE</DefineConstants>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Include="..\src\CommonProperties.cs" Link="CommonProperties.cs" />
     <Compile Include="..\src\Consts.cs" Link="Consts.cs" />
