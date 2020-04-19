@@ -99,7 +99,7 @@ namespace LogoFX.Client.Core.Tests
         [When(@"The number is changed to (.*) via SetProperty API")]
         public void WhenTheNumberIsChangedToViaSetPropertyAPI(int value)
         {
-            var @class = _scenarioContext.Get<TestRegularClass>("class");
+            var @class = _scenarioContext.Get<TestClassBase>("class");
             @class.Number = value;
         }
 
@@ -131,6 +131,13 @@ namespace LogoFX.Client.Core.Tests
             bool.TryParse(expectedResultStr, out var expectedResult);
             var isCalledRefCollection = _scenarioContext.Get<IEnumerable<ValueWrapper>>("isCalledRefCollection");
             isCalledRefCollection.Select(t => t.Value).Should().AllBeEquivalentTo(expectedResult);
+        }
+
+        [Then(@"The before value update logic is invoked before the value update")]
+        public void ThenTheBeforeValueUpdateLogicIsInvokedBeforeTheValueUpdate()
+        {
+            var @class = _scenarioContext.Get<TestBeforeValueUpdateClass>("class");
+            @class.PreviousValue.Should().Be(4);
         }
     }
 }

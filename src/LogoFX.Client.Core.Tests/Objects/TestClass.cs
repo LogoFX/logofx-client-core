@@ -28,14 +28,14 @@ namespace LogoFX.Client.Core.Tests
         public override int Number
         {
             get => 0;
-            set => NotifyOfPropertyChange("Number");
+            set => NotifyOfPropertyChange();
         }
     }
 
-    public class TestRegularClass : NotifyPropertyChangedBase<TestRegularClass>
+    public class TestRegularClass : TestClassBase
     {
         private int _number;
-        public int Number
+        public override int Number
         {
             get => _number;
             set => SetProperty(ref _number, value);
@@ -87,5 +87,20 @@ namespace LogoFX.Client.Core.Tests
         }
 
         public double Total => _cost * _quantity;
+    }
+
+    public class TestBeforeValueUpdateClass : TestClassBase
+    {
+        private int _number = 4;
+        public override int Number
+        {
+            get => _number;
+            set => SetProperty(ref _number, value, new SetPropertyOptions()
+            {
+                BeforeValueUpdate = () => PreviousValue = _number
+            });
+        }
+
+        public int PreviousValue { get; private set; }
     }
 }

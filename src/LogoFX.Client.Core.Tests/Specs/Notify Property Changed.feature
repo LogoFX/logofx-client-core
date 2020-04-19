@@ -40,3 +40,8 @@ Scenario: Changing single property with multiple notifications via SetProperty A
 	And The quantity is changed to 5 via SetProperty API
 	Then The property change notification result is 'true' for all notifications
 
+Scenario: Changing single property with before value update logic via SetProperty API should invoke this logic before property value changes
+	When The 'TestBeforeValueUpdateClass' is created
+	And The number is changed to 5 via SetProperty API
+	Then The before value update logic is invoked before the value update
+
