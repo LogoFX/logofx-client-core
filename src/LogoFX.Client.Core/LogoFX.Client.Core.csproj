@@ -6,6 +6,11 @@
     <Version>2.1.1</Version>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <EmbedAllSources>True</EmbedAllSources>
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\Bin\netstandard\Release</OutputPath>
     <DocumentationFile>..\Bin\netstandard\Release\LogoFX.Client.Core.xml</DocumentationFile>
