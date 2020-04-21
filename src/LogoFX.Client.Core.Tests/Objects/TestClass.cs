@@ -148,11 +148,11 @@ namespace LogoFX.Client.Core.Tests
         }
     }
 
-    public class TestOverrridenPropertyInfoClass : TestNameClass
+    public class TestOverridenPropertyInfoClass : TestNameClass
     {
         private readonly IDispatch _dispatch;
 
-        public TestOverrridenPropertyInfoClass(IDispatch dispatch)
+        public TestOverridenPropertyInfoClass(IDispatch dispatch)
         {
             _dispatch = dispatch;
         }

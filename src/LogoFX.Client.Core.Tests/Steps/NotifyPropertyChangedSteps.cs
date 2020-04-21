@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
@@ -47,7 +46,7 @@ namespace LogoFX.Client.Core.Tests
             var @class = CreateTestClass(name);
             if (@class != null)
             {
-                var isCalledRef = ListenToPropertyChange(@class, "Number");
+                var isCalledRef = TestClassHelper.ListenToPropertyChange(@class, "Number");
                 _scenarioContext.Add("class", @class);
                 _scenarioContext.Add("isCalledRef", isCalledRef);
             }
@@ -59,7 +58,7 @@ namespace LogoFX.Client.Core.Tests
             var @class = CreateTestClass(name, _scenarioContext.Get<object>(parameter));
             if (@class != null)
             {
-                var isCalledRef = ListenToPropertyChange(@class, "Number");
+                var isCalledRef = TestClassHelper.ListenToPropertyChange(@class, "Number");
                 _scenarioContext.Add("class", @class);
                 _scenarioContext.Add("isCalledRef", isCalledRef);
             }
@@ -72,7 +71,7 @@ namespace LogoFX.Client.Core.Tests
             var @class = CreateTestClass(name);
             if (@class != null)
             {
-                var isCalledRef = ListenToPropertyChange(@class, string.Empty);
+                var isCalledRef = TestClassHelper.ListenToPropertyChange(@class, string.Empty);
                 _scenarioContext.Add("class", @class);
                 _scenarioContext.Add("isCalledRef", isCalledRef);
             }
@@ -86,9 +85,9 @@ namespace LogoFX.Client.Core.Tests
             {
                 _scenarioContext.Add("class", @class);
                 var isCallRefCollection = new List<ValueWrapper>();
-                var isQuantityCalledRef = ListenToPropertyChange(@class, "Quantity");
+                var isQuantityCalledRef = TestClassHelper.ListenToPropertyChange(@class, "Quantity");
                 isCallRefCollection.Add(isQuantityCalledRef);
-                var isTotalCalledRef = ListenToPropertyChange(@class, "Total");
+                var isTotalCalledRef = TestClassHelper.ListenToPropertyChange(@class, "Total");
                 isCallRefCollection.Add(isTotalCalledRef);
                 _scenarioContext.Add("isCalledRefCollection", isCallRefCollection);
             }
@@ -96,23 +95,7 @@ namespace LogoFX.Client.Core.Tests
 
         private INotifyPropertyChanged CreateTestClass(string name, params object?[]? args)
         {
-            var types = Assembly.GetExecutingAssembly().DefinedTypes.ToArray();
-            var type = types.FirstOrDefault(t => t.Name == name)?.AsType();
-            return type == null ? null : Activator.CreateInstance(type, args) as INotifyPropertyChanged;
-        }
-
-        private ValueWrapper ListenToPropertyChange(INotifyPropertyChanged @class, string propertyName)
-        {
-            var isCalled = false;
-            var isCalledRef = new ValueWrapper(isCalled);
-            @class.PropertyChanged += (sender, args) =>
-            {
-                if (args.PropertyName == propertyName)
-                {
-                    isCalledRef.Value = true;
-                }
-            };
-            return isCalledRef;
+            return TestClassHelper.CreateTestClassImpl(Assembly.GetExecutingAssembly(), name, args);
         }
 
         [When(@"The number is changed to (.*)  in regular mode")]

@@ -36,7 +36,7 @@ Scenario Outline: Single property change in regular mode with overridden dispatc
 Examples:
 | Name                            |
 | TestOverridenNameClass          |
-| TestOverrridenPropertyInfoClass |
+| TestOverridenPropertyInfoClass |
 | TestOverriddenExpressionClass   |
 
 Scenario: Changing single property with overridden dispatcher should raise notifications via the overridden dispatcher

@@ -237,7 +237,7 @@ this.FeatureBackground();
         [Xunit.TraitAttribute("Description", "Single property change in regular mode with overridden dispatcher should raise no" +
             "tifications via the overridden dispatcher")]
         [Xunit.InlineDataAttribute("TestOverridenNameClass", new string[0])]
-        [Xunit.InlineDataAttribute("TestOverrridenPropertyInfoClass", new string[0])]
+        [Xunit.InlineDataAttribute("TestOverridenPropertyInfoClass", new string[0])]
         [Xunit.InlineDataAttribute("TestOverriddenExpressionClass", new string[0])]
         public virtual void SinglePropertyChangeInRegularModeWithOverriddenDispatcherShouldRaiseNotificationsViaTheOverriddenDispatcher(string name, string[] exampleTags)
         {

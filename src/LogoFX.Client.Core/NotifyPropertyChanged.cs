@@ -144,24 +144,43 @@ namespace LogoFX.Client.Core
                 return;
             }
 
-            var dispatch = GetDispatchImpl();
-
-            if (dispatch != null)
+            if (options?.CustomActionInvocation != null)
             {
-                dispatch.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
-                currentValue = newValue;
-                NotifyOfPropertyChange(name);
-                dispatch.OnUiThread(() =>
+                options.CustomActionInvocation(() =>
                 {
+                    options?.BeforeValueUpdate?.Invoke();
+                });
+                currentValue = newValue;
+                options.CustomActionInvocation(() =>
+                {
+                    if (!_suppressNotify)
+                    {
+                        _propertyChanged.Raise(this, name);
+                    }
                     options?.AfterValueUpdate?.Invoke();
                 });
             }
             else
             {
-                options?.BeforeValueUpdate?.Invoke();
-                currentValue = newValue;
-                NotifyOfPropertyChange(name);
-                options?.AfterValueUpdate?.Invoke();
+                var dispatch = GetDispatchImpl();
+
+                if (dispatch != null)
+                {
+                    dispatch.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
+                    currentValue = newValue;
+                    NotifyOfPropertyChange(name);
+                    dispatch.OnUiThread(() =>
+                    {
+                        options?.AfterValueUpdate?.Invoke();
+                    });
+                }
+                else
+                {
+                    options?.BeforeValueUpdate?.Invoke();
+                    currentValue = newValue;
+                    NotifyOfPropertyChange(name);
+                    options?.AfterValueUpdate?.Invoke();
+                }
             }
         }
 
@@ -572,5 +591,7 @@ namespace LogoFX.Client.Core
         /// Invoked after a property value is updated.
         /// </summary>
         public Action AfterValueUpdate { get; set; }
+
+        public Action<Action> CustomActionInvocation { get; set; }
     }
 }
