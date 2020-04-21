@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
@@ -16,6 +17,14 @@ namespace LogoFX.Client.Core.Tests
         public NotifyPropertyChangedSteps(ScenarioContext scenarioContext)
         {
             _scenarioContext = scenarioContext;
+        }
+
+        [Given(@"The dispatcher is set to test dispatcher")]
+        public void GivenTheDispatcherIsSetToTestDispatcher()
+        {
+            var dispatch = new FakeDispatch();
+            _scenarioContext.Add("dispatch", dispatch);
+            Dispatch.Current = dispatch;
         }
 
         [When(@"The '(.*)' is created")]
@@ -138,6 +147,20 @@ namespace LogoFX.Client.Core.Tests
         {
             var @class = _scenarioContext.Get<TestBeforeValueUpdateClass>("class");
             @class.PreviousValue.Should().Be(4);
+        }
+
+        [Then(@"The after value update logic is invoked after the value update")]
+        public void ThenTheAfterValueUpdateLogicIsInvokedAfterTheValueUpdate()
+        {
+            var @class = _scenarioContext.Get<TestAfterValueUpdateClass>("class");
+            @class.Number.Should().Be(6);
+        }
+
+        [Then(@"The property change notification is raised via the test dispatcher")]
+        public void ThenThePropertyChangeNotificationIsRaisedViaTheTestDispatcher()
+        {
+            var fakeDispatch = _scenarioContext.Get<FakeDispatch>("dispatch");
+            fakeDispatch.IsOnUiThreadCalled.Should().BeTrue();
         }
     }
 }

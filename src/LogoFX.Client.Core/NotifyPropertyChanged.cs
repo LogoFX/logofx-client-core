@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace LogoFX.Client.Core
 {
@@ -105,8 +106,22 @@ namespace LogoFX.Client.Core
         protected void NotifyOfPropertiesChange()
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject)this));
+        }
+
+        private void InvokeViaDispatcher(Action action)
+        {
             if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this);
+            {
+                if (Dispatch.Current != null)
+                {
+                    Dispatch.Current.OnUiThread(action);
+                }
+                else
+                {
+                    action();
+                }
+            }
         }
 
         /// <summary>
@@ -129,10 +144,24 @@ namespace LogoFX.Client.Core
             {
                 return;
             }
-            options?.BeforeValueUpdate?.Invoke();
-            currentValue = newValue;
-            NotifyOfPropertyChange(name);
-            options?.AfterValueUpdate?.Invoke();
+
+            if (Dispatch.Current != null)
+            {
+                Dispatch.Current.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
+                currentValue = newValue;
+                Dispatch.Current.OnUiThread(() =>
+                {
+                    NotifyOfPropertyChange(name);
+                    options?.AfterValueUpdate?.Invoke();
+                });
+            }
+            else
+            {
+                options?.BeforeValueUpdate?.Invoke();
+                currentValue = newValue;
+                NotifyOfPropertyChange(name);
+                options?.AfterValueUpdate?.Invoke();
+            }
         }
 
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
