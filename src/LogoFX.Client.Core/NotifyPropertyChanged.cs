@@ -105,13 +105,16 @@ namespace LogoFX.Client.Core
             InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this));
         }
 
+        protected virtual IDispatch GetDispatch() => null;
+
         private void InvokeViaDispatcher(Action action)
         {
             if (!_suppressNotify)
             {
-                if (Dispatch.Current != null)
+                var dispatch = GetDispatchImpl();
+                if (dispatch != null)
                 {
-                    Dispatch.Current.OnUiThread(action);
+                    dispatch.OnUiThread(action);
                 }
                 else
                 {
@@ -141,13 +144,15 @@ namespace LogoFX.Client.Core
                 return;
             }
 
-            if (Dispatch.Current != null)
+            var dispatch = GetDispatchImpl();
+
+            if (dispatch != null)
             {
-                Dispatch.Current.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
+                dispatch.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
                 currentValue = newValue;
-                Dispatch.Current.OnUiThread(() =>
+                NotifyOfPropertyChange(name);
+                dispatch.OnUiThread(() =>
                 {
-                    NotifyOfPropertyChange(name);
                     options?.AfterValueUpdate?.Invoke();
                 });
             }
@@ -159,6 +164,8 @@ namespace LogoFX.Client.Core
                 options?.AfterValueUpdate?.Invoke();
             }
         }
+
+        private IDispatch GetDispatchImpl() => GetDispatch() ?? Dispatch.Current;
 
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 

@@ -231,6 +231,107 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in regular mode with overridden dispatcher should raise no" +
+            "tifications via the overridden dispatcher")]
+        [Xunit.TraitAttribute("FeatureTitle", "Dispatcher")]
+        [Xunit.TraitAttribute("Description", "Single property change in regular mode with overridden dispatcher should raise no" +
+            "tifications via the overridden dispatcher")]
+        [Xunit.InlineDataAttribute("TestOverridenNameClass", new string[0])]
+        [Xunit.InlineDataAttribute("TestOverrridenPropertyInfoClass", new string[0])]
+        [Xunit.InlineDataAttribute("TestOverriddenExpressionClass", new string[0])]
+        public virtual void SinglePropertyChangeInRegularModeWithOverriddenDispatcherShouldRaiseNotificationsViaTheOverriddenDispatcher(string name, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single property change in regular mode with overridden dispatcher should raise no" +
+                    "tifications via the overridden dispatcher", null, exampleTags);
+#line 30
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 31
+ testRunner.Given("The dispatcher is set to overridden dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 32
+ testRunner.When(string.Format("The \'{0}\' is created with \'dispatch\' parameter", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 33
+ testRunner.And("The number is changed to 5  in regular mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 34
+ testRunner.Then("The property change notification is raised via the overridden dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Changing single property with overridden dispatcher should raise notifications vi" +
+            "a the overridden dispatcher")]
+        [Xunit.TraitAttribute("FeatureTitle", "Dispatcher")]
+        [Xunit.TraitAttribute("Description", "Changing single property with overridden dispatcher should raise notifications vi" +
+            "a the overridden dispatcher")]
+        public virtual void ChangingSinglePropertyWithOverriddenDispatcherShouldRaiseNotificationsViaTheOverriddenDispatcher()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property with overridden dispatcher should raise notifications vi" +
+                    "a the overridden dispatcher", null, ((string[])(null)));
+#line 42
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 43
+ testRunner.Given("The dispatcher is set to overridden dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 44
+ testRunner.When("The \'TestOverriddenDispatcherClass\' is created with \'dispatch\' parameter", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 45
+ testRunner.And("The number is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 46
+ testRunner.Then("The property change notification is raised via the overridden dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable

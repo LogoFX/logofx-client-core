@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading;
 
 namespace LogoFX.Client.Core.Tests
 {
@@ -114,6 +115,66 @@ namespace LogoFX.Client.Core.Tests
             {
                 AfterValueUpdate = () => _number = 6
             });
+        }
+    }
+
+    public class TestOverriddenDispatcherClass : TestRegularClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverriddenDispatcherClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverridenNameClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverridenNameClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverrridenPropertyInfoClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverrridenPropertyInfoClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverriddenExpressionClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverriddenExpressionClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
         }
     }
 }

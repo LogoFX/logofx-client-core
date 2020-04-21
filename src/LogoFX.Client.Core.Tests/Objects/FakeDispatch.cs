@@ -24,4 +24,9 @@ namespace LogoFX.Client.Core.Tests
             
         }
     }
+
+    class OverriddenDispatch : FakeDispatch
+    {
+
+    }
 }

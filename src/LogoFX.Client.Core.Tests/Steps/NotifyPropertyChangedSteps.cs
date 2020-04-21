@@ -27,6 +27,20 @@ namespace LogoFX.Client.Core.Tests
             Dispatch.Current = dispatch;
         }
 
+        [Given(@"The dispatcher is set to overridden dispatcher")]
+        public void GivenTheDispatcherIsSetToOverriddenDispatcher()
+        {
+            var dispatch = new OverriddenDispatch();
+            if (_scenarioContext.ContainsKey("dispatch"))
+            {
+                _scenarioContext["dispatch"] = dispatch;
+            }
+            else
+            {
+                _scenarioContext.Add("dispatch", dispatch);
+            }
+        }
+
         [When(@"The '(.*)' is created")]
         public void WhenTheIsCreated(string name)
         {
@@ -38,6 +52,19 @@ namespace LogoFX.Client.Core.Tests
                 _scenarioContext.Add("isCalledRef", isCalledRef);
             }
         }
+
+        [When(@"The '(.*)' is created with '(.*)' parameter")]
+        public void WhenTheIsCreatedWithParameter(string name, string parameter)
+        {
+            var @class = CreateTestClass(name, _scenarioContext.Get<object>(parameter));
+            if (@class != null)
+            {
+                var isCalledRef = ListenToPropertyChange(@class, "Number");
+                _scenarioContext.Add("class", @class);
+                _scenarioContext.Add("isCalledRef", isCalledRef);
+            }
+        }
+
 
         [When(@"The '(.*)' is created and empty notification is listened to")]
         public void WhenTheIsCreatedAndEmptyNotificationIsListenedTo(string name)
@@ -67,11 +94,11 @@ namespace LogoFX.Client.Core.Tests
             }
         }
 
-        private INotifyPropertyChanged CreateTestClass(string name)
+        private INotifyPropertyChanged CreateTestClass(string name, params object?[]? args)
         {
             var types = Assembly.GetExecutingAssembly().DefinedTypes.ToArray();
             var type = types.FirstOrDefault(t => t.Name == name)?.AsType();
-            return type == null ? null : Activator.CreateInstance(type) as INotifyPropertyChanged;
+            return type == null ? null : Activator.CreateInstance(type, args) as INotifyPropertyChanged;
         }
 
         private ValueWrapper ListenToPropertyChange(INotifyPropertyChanged @class, string propertyName)
@@ -161,6 +188,14 @@ namespace LogoFX.Client.Core.Tests
         {
             var fakeDispatch = _scenarioContext.Get<FakeDispatch>("dispatch");
             fakeDispatch.IsOnUiThreadCalled.Should().BeTrue();
+        }
+
+        [Then(@"The property change notification is raised via the overridden dispatcher")]
+        public void ThenThePropertyChangeNotificationIsRaisedViaTheOverriddenDispatcher()
+        {
+            var fakeDispatch = _scenarioContext.Get<FakeDispatch>("dispatch");
+            fakeDispatch.IsOnUiThreadCalled.Should().BeTrue();
+            fakeDispatch.Should().BeOfType<OverriddenDispatch>();
         }
     }
 }
