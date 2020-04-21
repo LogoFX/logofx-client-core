@@ -12,6 +12,10 @@
     <EmbedAllSources>True</EmbedAllSources>
     <DebugType>embedded</DebugType>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>  
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LogoFX.Core" Version="2.1.1-rc1" />
+  </ItemGroup>  
 
 </Project>
