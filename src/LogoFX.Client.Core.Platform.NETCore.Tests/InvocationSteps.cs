@@ -43,13 +43,11 @@ namespace LogoFX.Client.Core.Platform.NETCore.Tests
             }
         }
 
-
         [Then(@"The property change notification is raised via the custom action invocation")]
         public void ThenThePropertyChangeNotificationIsRaisedViaTheCustomActionInvocation()
         {
             var fakeDispatch = _scenarioContext.Get<TestPlatformDispatch>("dispatch");
             fakeDispatch.IsCustomActionInvoked.Should().BeTrue();
         }
-
     }
 }

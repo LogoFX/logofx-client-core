@@ -66,7 +66,6 @@ namespace LogoFX.Client.Core.Tests
             }
         }
 
-
         [When(@"The '(.*)' is created and empty notification is listened to")]
         public void WhenTheIsCreatedAndEmptyNotificationIsListenedTo(string name)
         {
