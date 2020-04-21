@@ -76,22 +76,34 @@ namespace LogoFX.Client.Core.Tests.Specs
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 6
+#line hidden
+#line 7
+ testRunner.Given("The dispatcher is set to test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+        }
+        
         void System.IDisposable.Dispose()
         {
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Changing single property with defined dispatcher should raise notifications via d" +
-            "ispatcher")]
+        [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in regular mode with defined dispatcher should raise notif" +
+            "ications via dispatcher")]
         [Xunit.TraitAttribute("FeatureTitle", "Dispatcher")]
-        [Xunit.TraitAttribute("Description", "Changing single property with defined dispatcher should raise notifications via d" +
-            "ispatcher")]
-        public virtual void ChangingSinglePropertyWithDefinedDispatcherShouldRaiseNotificationsViaDispatcher()
+        [Xunit.TraitAttribute("Description", "Single property change in regular mode with defined dispatcher should raise notif" +
+            "ications via dispatcher")]
+        [Xunit.InlineDataAttribute("TestNameClass", new string[0])]
+        [Xunit.InlineDataAttribute("TestPropertyInfoClass", new string[0])]
+        [Xunit.InlineDataAttribute("TestExpressionClass", new string[0])]
+        public virtual void SinglePropertyChangeInRegularModeWithDefinedDispatcherShouldRaiseNotificationsViaDispatcher(string name, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property with defined dispatcher should raise notifications via d" +
-                    "ispatcher", null, ((string[])(null)));
-#line 6
+            string[] tagsOfScenario = exampleTags;
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Single property change in regular mode with defined dispatcher should raise notif" +
+                    "ications via dispatcher", null, exampleTags);
+#line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -111,16 +123,62 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 7
- testRunner.Given("The dispatcher is set to test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-#line 8
- testRunner.When("The \'TestRegularClass\' is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 9
- testRunner.And("The number is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 6
+this.FeatureBackground();
 #line hidden
 #line 10
+ testRunner.When(string.Format("The \'{0}\' is created", name), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 11
+ testRunner.And("The number is changed to 5  in regular mode", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 12
+ testRunner.Then("The property change notification is raised via the test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Changing single property with defined dispatcher should raise notifications via d" +
+            "ispatcher")]
+        [Xunit.TraitAttribute("FeatureTitle", "Dispatcher")]
+        [Xunit.TraitAttribute("Description", "Changing single property with defined dispatcher should raise notifications via d" +
+            "ispatcher")]
+        public virtual void ChangingSinglePropertyWithDefinedDispatcherShouldRaiseNotificationsViaDispatcher()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property with defined dispatcher should raise notifications via d" +
+                    "ispatcher", null, ((string[])(null)));
+#line 20
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 6
+this.FeatureBackground();
+#line hidden
+#line 21
+ testRunner.When("The \'TestRegularClass\' is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 22
+ testRunner.And("The number is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 23
  testRunner.Then("The property change notification is raised via the test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
@@ -137,7 +195,7 @@ this.ScenarioInitialize(scenarioInfo);
             string[] tagsOfScenario = ((string[])(null));
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Invoking all properties change with defined dispatcher should raise notification " +
                     "via dispatcher", null, ((string[])(null)));
-#line 12
+#line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -157,16 +215,16 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 13
- testRunner.Given("The dispatcher is set to test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 6
+this.FeatureBackground();
 #line hidden
-#line 14
+#line 26
  testRunner.When("The \'TestNameClass\' is created and empty notification is listened to", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
-#line 15
+#line 27
  testRunner.And("The all properties change is invoked", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
-#line 16
+#line 28
  testRunner.Then("The property change notification is raised via the test dispatcher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }

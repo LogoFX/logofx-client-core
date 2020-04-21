@@ -41,8 +41,7 @@ namespace LogoFX.Client.Core
         /// </summary>
         protected void OnItemsPropertyChanged()
         {
-            if (!_suppressNotify)
-                _propertyChanged.RaiseItems(this);
+            InvokeViaDispatcher(() => _propertyChanged.RaiseItems(this));
         }
 
         /// <summary>
@@ -62,8 +61,7 @@ namespace LogoFX.Client.Core
         protected void NotifyOfPropertyChange(PropertyInfo propInfo)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, propInfo);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, propInfo));
         }
 
         /// <summary>
@@ -74,19 +72,17 @@ namespace LogoFX.Client.Core
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> expression)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, expression);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, expression));
         }
 
         /// <summary>
         /// Raises <see cref="PropertyChanged"/> for the given property.
         /// </summary>
         /// <param name="name"></param>
-        protected void NotifyOfPropertyChange([CallerMemberName]string name = "")
+        protected void NotifyOfPropertyChange([CallerMemberName] string name = "")
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, name);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, name));
         }
 
         /// <summary>
@@ -97,7 +93,7 @@ namespace LogoFX.Client.Core
         protected void OnPropertyChanged<TProperty>(Expression<Func<TObject, TProperty>> expression)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            _propertyChanged.Raise((TObject)this, expression);
+            _propertyChanged.Raise((TObject) this, expression);
         }
 
         /// <summary>
@@ -106,7 +102,7 @@ namespace LogoFX.Client.Core
         protected void NotifyOfPropertiesChange()
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject)this));
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this));
         }
 
         private void InvokeViaDispatcher(Action action)
