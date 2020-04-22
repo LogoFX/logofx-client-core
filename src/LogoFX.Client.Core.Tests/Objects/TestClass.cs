@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Threading;
 
 namespace LogoFX.Client.Core.Tests
 {
@@ -102,5 +103,78 @@ namespace LogoFX.Client.Core.Tests
         }
 
         public int PreviousValue { get; private set; }
+    }
+
+    public class TestAfterValueUpdateClass : TestClassBase
+    {
+        private int _number = 4;
+        public override int Number
+        {
+            get => _number;
+            set => SetProperty(ref _number, value, new SetPropertyOptions()
+            {
+                AfterValueUpdate = () => _number = 6
+            });
+        }
+    }
+
+    public class TestOverriddenDispatcherClass : TestRegularClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverriddenDispatcherClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverridenNameClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverridenNameClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverridenPropertyInfoClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverridenPropertyInfoClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
+    }
+
+    public class TestOverriddenExpressionClass : TestNameClass
+    {
+        private readonly IDispatch _dispatch;
+
+        public TestOverriddenExpressionClass(IDispatch dispatch)
+        {
+            _dispatch = dispatch;
+        }
+
+        protected override IDispatch GetDispatch()
+        {
+            return _dispatch;
+        }
     }
 }

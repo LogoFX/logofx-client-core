@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace LogoFX.Client.Core
 {
@@ -40,8 +41,7 @@ namespace LogoFX.Client.Core
         /// </summary>
         protected void OnItemsPropertyChanged()
         {
-            if (!_suppressNotify)
-                _propertyChanged.RaiseItems(this);
+            InvokeViaDispatcher(() => _propertyChanged.RaiseItems(this));
         }
 
         /// <summary>
@@ -61,8 +61,7 @@ namespace LogoFX.Client.Core
         protected void NotifyOfPropertyChange(PropertyInfo propInfo)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, propInfo);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, propInfo));
         }
 
         /// <summary>
@@ -73,19 +72,17 @@ namespace LogoFX.Client.Core
         protected void OnPropertyChanged<TProperty>(Expression<Func<TProperty>> expression)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, expression);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, expression));
         }
 
         /// <summary>
         /// Raises <see cref="PropertyChanged"/> for the given property.
         /// </summary>
         /// <param name="name"></param>
-        protected void NotifyOfPropertyChange([CallerMemberName]string name = "")
+        protected void NotifyOfPropertyChange([CallerMemberName] string name = "")
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this, name);
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this, name));
         }
 
         /// <summary>
@@ -96,7 +93,7 @@ namespace LogoFX.Client.Core
         protected void OnPropertyChanged<TProperty>(Expression<Func<TObject, TProperty>> expression)
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
-            _propertyChanged.Raise((TObject)this, expression);
+            _propertyChanged.Raise((TObject) this, expression);
         }
 
         /// <summary>
@@ -105,8 +102,25 @@ namespace LogoFX.Client.Core
         protected void NotifyOfPropertiesChange()
         {
             // The cast of "this" to TObject will always succeed due to the generic constraint on this class
+            InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this));
+        }
+
+        protected virtual IDispatch GetDispatch() => null;
+
+        private void InvokeViaDispatcher(Action action)
+        {
             if (!_suppressNotify)
-                _propertyChanged.Raise((TObject)this);
+            {
+                var dispatch = GetDispatchImpl();
+                if (dispatch != null)
+                {
+                    dispatch.OnUiThread(action);
+                }
+                else
+                {
+                    action();
+                }
+            }
         }
 
         /// <summary>
@@ -129,11 +143,48 @@ namespace LogoFX.Client.Core
             {
                 return;
             }
-            options?.BeforeValueUpdate?.Invoke();
-            currentValue = newValue;
-            NotifyOfPropertyChange(name);
-            options?.AfterValueUpdate?.Invoke();
+
+            if (options?.CustomActionInvocation != null)
+            {
+                options.CustomActionInvocation(() =>
+                {
+                    options?.BeforeValueUpdate?.Invoke();
+                });
+                currentValue = newValue;
+                options.CustomActionInvocation(() =>
+                {
+                    if (!_suppressNotify)
+                    {
+                        _propertyChanged.Raise(this, name);
+                    }
+                    options?.AfterValueUpdate?.Invoke();
+                });
+            }
+            else
+            {
+                var dispatch = GetDispatchImpl();
+
+                if (dispatch != null)
+                {
+                    dispatch.OnUiThread(() => { options?.BeforeValueUpdate?.Invoke(); });
+                    currentValue = newValue;
+                    NotifyOfPropertyChange(name);
+                    dispatch.OnUiThread(() =>
+                    {
+                        options?.AfterValueUpdate?.Invoke();
+                    });
+                }
+                else
+                {
+                    options?.BeforeValueUpdate?.Invoke();
+                    currentValue = newValue;
+                    NotifyOfPropertyChange(name);
+                    options?.AfterValueUpdate?.Invoke();
+                }
+            }
         }
+
+        private IDispatch GetDispatchImpl() => GetDispatch() ?? Dispatch.Current;
 
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 
@@ -540,5 +591,7 @@ namespace LogoFX.Client.Core
         /// Invoked after a property value is updated.
         /// </summary>
         public Action AfterValueUpdate { get; set; }
+
+        public Action<Action> CustomActionInvocation { get; set; }
     }
 }

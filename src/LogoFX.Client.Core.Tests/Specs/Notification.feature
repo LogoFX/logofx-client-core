@@ -1,4 +1,4 @@
-﻿Feature: Notify Property Changed
+﻿Feature: Notification
 	In order to have reactive user interface
 	As an app developer
 	I want the framework to handle property notifications properly
@@ -44,4 +44,9 @@ Scenario: Changing single property with before value update logic via SetPropert
 	When The 'TestBeforeValueUpdateClass' is created
 	And The number is changed to 5 via SetProperty API
 	Then The before value update logic is invoked before the value update
+
+Scenario: Changing single property with after value update logic via SetProperty API should invoke this logic after property value changes
+	When The 'TestAfterValueUpdateClass' is created
+	And The number is changed to 5 via SetProperty API
+	Then The after value update logic is invoked after the value update
 

@@ -19,7 +19,7 @@ namespace LogoFX.Client.Core.Tests.Specs
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class NotifyPropertyChangedFeature : object, Xunit.IClassFixture<NotifyPropertyChangedFeature.FixtureData>, System.IDisposable
+    public partial class NotificationFeature : object, Xunit.IClassFixture<NotificationFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace LogoFX.Client.Core.Tests.Specs
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "Notify Property Changed.feature"
+#line 1 "Notification.feature"
 #line hidden
         
-        public NotifyPropertyChangedFeature(NotifyPropertyChangedFeature.FixtureData fixtureData, LogoFX_Client_Core_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public NotificationFeature(NotificationFeature.FixtureData fixtureData, LogoFX_Client_Core_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,7 +40,7 @@ namespace LogoFX.Client.Core.Tests.Specs
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Notify Property Changed", "\tIn order to have reactive user interface\r\n\tAs an app developer\r\n\tI want the fram" +
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Notification", "\tIn order to have reactive user interface\r\n\tAs an app developer\r\n\tI want the fram" +
                     "ework to handle property notifications properly", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
@@ -82,7 +82,7 @@ namespace LogoFX.Client.Core.Tests.Specs
         }
         
         [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in regular mode should raise property change notification")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Single property change in regular mode should raise property change notification")]
         [Xunit.InlineDataAttribute("TestNameClass", "true", new string[0])]
         [Xunit.InlineDataAttribute("TestPropertyInfoClass", "true", new string[0])]
@@ -126,7 +126,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [Xunit.SkippableTheoryAttribute(DisplayName="Single property change in silent mode should not raise property change notificati" +
             "on")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Single property change in silent mode should not raise property change notificati" +
             "on")]
         [Xunit.InlineDataAttribute("TestNameClass", "false", new string[0])]
@@ -171,7 +171,7 @@ this.ScenarioInitialize(scenarioInfo);
         }
         
         [Xunit.SkippableFactAttribute(DisplayName="Invoking all properties change should raise empty property change notification")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Invoking all properties change should raise empty property change notification")]
         public virtual void InvokingAllPropertiesChangeShouldRaiseEmptyPropertyChangeNotification()
         {
@@ -212,7 +212,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [Xunit.SkippableFactAttribute(DisplayName="Changing single property via SetProperty API should raise property change notific" +
             "ation")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Changing single property via SetProperty API should raise property change notific" +
             "ation")]
         public virtual void ChangingSinglePropertyViaSetPropertyAPIShouldRaisePropertyChangeNotification()
@@ -255,7 +255,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [Xunit.SkippableFactAttribute(DisplayName="Changing single property with multiple notifications via SetProperty API should r" +
             "aise all property change notifications")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Changing single property with multiple notifications via SetProperty API should r" +
             "aise all property change notifications")]
         public virtual void ChangingSinglePropertyWithMultipleNotificationsViaSetPropertyAPIShouldRaiseAllPropertyChangeNotifications()
@@ -298,7 +298,7 @@ this.ScenarioInitialize(scenarioInfo);
         
         [Xunit.SkippableFactAttribute(DisplayName="Changing single property with before value update logic via SetProperty API shoul" +
             "d invoke this logic before property value changes")]
-        [Xunit.TraitAttribute("FeatureTitle", "Notify Property Changed")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
         [Xunit.TraitAttribute("Description", "Changing single property with before value update logic via SetProperty API shoul" +
             "d invoke this logic before property value changes")]
         public virtual void ChangingSinglePropertyWithBeforeValueUpdateLogicViaSetPropertyAPIShouldInvokeThisLogicBeforePropertyValueChanges()
@@ -339,6 +339,49 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
+        [Xunit.SkippableFactAttribute(DisplayName="Changing single property with after value update logic via SetProperty API should" +
+            " invoke this logic after property value changes")]
+        [Xunit.TraitAttribute("FeatureTitle", "Notification")]
+        [Xunit.TraitAttribute("Description", "Changing single property with after value update logic via SetProperty API should" +
+            " invoke this logic after property value changes")]
+        public virtual void ChangingSinglePropertyWithAfterValueUpdateLogicViaSetPropertyAPIShouldInvokeThisLogicAfterPropertyValueChanges()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Changing single property with after value update logic via SetProperty API should" +
+                    " invoke this logic after property value changes", null, ((string[])(null)));
+#line 48
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 49
+ testRunner.When("The \'TestAfterValueUpdateClass\' is created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 50
+ testRunner.And("The number is changed to 5 via SetProperty API", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 51
+ testRunner.Then("The after value update logic is invoked after the value update", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
         [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.1.0.0")]
         [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
         public class FixtureData : System.IDisposable
@@ -346,12 +389,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                NotifyPropertyChangedFeature.FeatureSetup();
+                NotificationFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                NotifyPropertyChangedFeature.FeatureTearDown();
+                NotificationFeature.FeatureTearDown();
             }
         }
     }
