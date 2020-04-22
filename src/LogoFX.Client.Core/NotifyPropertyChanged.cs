@@ -106,6 +106,11 @@ namespace LogoFX.Client.Core
             InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this));
         }
 
+        /// <summary>
+        /// Returns per-object dispatch.
+        /// Override to inject custom implementation of <see cref="IDispatch"/>.
+        /// </summary>
+        /// <returns></returns>
         protected virtual IDispatch GetDispatch() => null;
 
         private void InvokeViaDispatcher(Action action)
@@ -551,6 +556,9 @@ namespace LogoFX.Client.Core
         /// </summary>
         public Action AfterValueUpdate { get; set; }
 
+        /// <summary>
+        /// Allows injecting custom value update invocation method.
+        /// </summary>
         public Action<Action> CustomActionInvocation { get; set; }
     }
 }
