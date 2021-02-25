@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using System.Threading;
 using FluentAssertions;
-using LogoFX.Client.Core.Tests;
+using LogoFX.Client.Core.Specs.Helpers;
 using TechTalk.SpecFlow;
 
-namespace LogoFX.Client.Core.Platform.NETCore.Tests
+namespace LogoFX.Client.Core.Platform.NETCore.Specs
 {
     [Binding]
     internal sealed class InvocationSteps

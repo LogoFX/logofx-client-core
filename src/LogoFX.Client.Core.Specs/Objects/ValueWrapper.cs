@@ -1,4 +1,4 @@
-﻿namespace LogoFX.Client.Core.Tests
+﻿namespace LogoFX.Client.Core.Specs.Objects
 {
     public class ValueWrapper
     {

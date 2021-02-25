@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Threading;
-using LogoFX.Client.Core.Tests;
+using LogoFX.Client.Core.Specs.Objects;
 
-namespace LogoFX.Client.Core.Platform.NETCore.Tests
+namespace LogoFX.Client.Core.Platform.NETCore.Specs
 {
     public class TestCustomActionInvocationClass : TestClassBase
     {

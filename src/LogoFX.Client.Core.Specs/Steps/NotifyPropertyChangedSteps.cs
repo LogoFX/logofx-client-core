@@ -6,9 +6,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using FluentAssertions;
+using LogoFX.Client.Core.Specs.Helpers;
+using LogoFX.Client.Core.Specs.Objects;
 using TechTalk.SpecFlow;
 
-namespace LogoFX.Client.Core.Tests
+namespace LogoFX.Client.Core.Specs.Steps
 {
     [Binding]
     internal sealed class NotifyPropertyChangedSteps

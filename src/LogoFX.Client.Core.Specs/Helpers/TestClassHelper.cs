@@ -4,8 +4,9 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using LogoFX.Client.Core.Specs.Objects;
 
-namespace LogoFX.Client.Core.Tests
+namespace LogoFX.Client.Core.Specs.Helpers
 {
     public static class TestClassHelper
     {

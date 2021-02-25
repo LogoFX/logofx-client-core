@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using TechTalk.SpecFlow;
 
-namespace LogoFX.Client.Core.Tests
+namespace LogoFX.Client.Core.Specs.Steps
 {
     [Binding]
     internal sealed class SemaphoreSteps
