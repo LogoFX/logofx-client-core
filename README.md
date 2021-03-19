@@ -7,7 +7,7 @@ Core client facilities, including Dispatcher and INotifyPropertyChanged implemen
 
 <img src=https://img.shields.io/nuget/dt/LogoFX.Client.Core.Core>
 
-[Living Documentation](https://ci.appveyor.com/api/projects/logofx/logofx-client-core/artifacts/LogoFX.Client.Core.Specs/bin/Release/LivingDoc.html)
+[Living Documentation](https://ci.appveyor.com/api/projects/logofx/logofx-client-core/artifacts/src/LogoFX.Client.Core.Specs/bin/Release/LivingDoc.html)
 
 [Get package](https://www.nuget.org/packages/LogoFX.Client.Core.Core)
 
@@ -15,6 +15,6 @@ Core client facilities, including Dispatcher and INotifyPropertyChanged implemen
 
 <img src=https://img.shields.io/nuget/dt/LogoFX.Client.Core>
 
-[Living Documentation](https://ci.appveyor.com/api/projects/logofx/logofx-client-core/artifacts/LogoFX.Client.Core.Platform.NETCore.Specs/bin/Release/LivingDoc.html)
+[Living Documentation](https://ci.appveyor.com/api/projects/logofx/logofx-client-core/artifacts/src/LogoFX.Client.Core.Platform.NETCore.Specs/bin/Release/LivingDoc.html)
 
 [Get package](https://www.nuget.org/packages/LogoFX.Client.Core)
