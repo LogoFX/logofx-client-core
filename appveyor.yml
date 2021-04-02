@@ -15,7 +15,7 @@ build:
 
 test_script:
   - cd
-  - cd ./devops/test
+  - cd ../devops/test
   - test-all.bat
   - cd ../../
 
