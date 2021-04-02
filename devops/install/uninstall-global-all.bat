@@ -1,2 +1,2 @@
-call uninstall-global-single LogoFX.Client.Core.Core
-call uninstall-global-single LogoFX.Client.Core
+call uninstall-global-single LogoFX.Client.Core.Core %1
+call uninstall-global-single LogoFX.Client.Core %1
