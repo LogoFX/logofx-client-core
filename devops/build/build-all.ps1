@@ -3,4 +3,4 @@ Install-Module BuildUtils -Scope CurrentUser -Force
 
 $msbuildLocation = Get-LatestMsbuildLocation
 set-alias msb $msbuildLocation
-msb "../../src/LogoFX.Client.Core.sln" -property:Configuration=Release /t:Clean,Build
+msb "../src/LogoFX.Client.Core.sln" -property:Configuration=Release /t:Clean,Build

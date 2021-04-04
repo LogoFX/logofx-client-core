@@ -23,8 +23,11 @@ test_script:
 
 after_test:
   - cd devops
-  - cd pack
-  - pack-all
+  - cd publish
+  - cd PublishUtil
+  - dotnet build
+  - cd bin
+  - dotnet PublishUtil.dll
 
 artifacts:
 
