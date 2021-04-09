@@ -16,5 +16,5 @@
     <dependencies>
       <dependency id="LogoFX.Client.Core.Core" version="2.2.0-rc2" />
     </dependencies>
-  </metadata>  
+  </metadata>
 </package>
