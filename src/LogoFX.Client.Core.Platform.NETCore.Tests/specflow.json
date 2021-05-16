@@ -1,7 +1,0 @@
-{
-  "stepAssemblies": [
-    {
-      "assembly": "LogoFX.Client.Core.Tests"
-    }
-  ]
-}

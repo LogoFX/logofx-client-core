@@ -1,10 +1,31 @@
+version: 2.2.0.{build}
+init:
+- dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
 configuration: Release
-
 before_build:
 - cd src
 - nuget restore
-
 image: Visual Studio 2019
-
 build:
   verbosity: minimal
+  project: ./src/LogoFX.Client.Core.sln
+test_script:
+- cd
+- cd ../devops/test
+- test-all.bat
+- cd ../../
+after_test:
+- cd devops
+- cd publish
+- cd PublishUtil
+- dotnet build
+- cd bin
+- dotnet PublishUtil.dll
+artifacts:
+- name: Packages
+  path: ./output/*.nupkg
+- name: Core Living Documentation
+  path: ./src/LogoFX.Client.Core.Specs/bin/Release/LivingDoc.html
+- name: Platform Living Documentation
+  path: ./src/LogoFX.Client.Core.Platform.NETCore.Specs/bin/Release/LivingDoc.html
+...

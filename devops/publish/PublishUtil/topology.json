@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "id": "LogoFX.Client.Core.Core"
+    },
+    {
+      "id": "LogoFX.Client.Core",
+      "dependencies": [ "LogoFX.Client.Core.Core" ]
+    }  
+  ]
+}

@@ -8,6 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
+using LogoFX.Core;
 
 namespace LogoFX.Client.Core
 {
@@ -105,11 +106,16 @@ namespace LogoFX.Client.Core
             InvokeViaDispatcher(() => _propertyChanged.Raise((TObject) this));
         }
 
+        /// <summary>
+        /// Returns per-object dispatch.
+        /// Override to inject custom implementation of <see cref="IDispatch"/>.
+        /// </summary>
+        /// <returns></returns>
         protected virtual IDispatch GetDispatch() => null;
 
         private void InvokeViaDispatcher(Action action)
         {
-            if (!_suppressNotify)
+            if (!_notifyManager.IsMuted)
             {
                 var dispatch = GetDispatchImpl();
                 if (dispatch != null)
@@ -153,7 +159,7 @@ namespace LogoFX.Client.Core
                 currentValue = newValue;
                 options.CustomActionInvocation(() =>
                 {
-                    if (!_suppressNotify)
+                    if (!_notifyManager.IsMuted)
                     {
                         _propertyChanged.Raise(this, name);
                     }
@@ -186,40 +192,15 @@ namespace LogoFX.Client.Core
 
         private IDispatch GetDispatchImpl() => GetDispatch() ?? Dispatch.Current;
 
+        private readonly INotifyManager _notifyManager = new NotifyManager();
+
         IDisposable ISuppressNotify.SuppressNotify => SuppressNotify;
 
         /// <summary>
         /// Gets the suppress notify.
+        /// To be used in <c>using</c> statement.
         /// </summary>
-        /// <remarks>use this in <see langword="using"></see> statement</remarks>
-        /// <value>The suppress notify.</value>
-        protected IDisposable SuppressNotify => new SuppressNotifyHelper<TObject>(this);
-
-        private bool _suppressNotify;
-
-        /// <summary>
-        /// Helper for notification suppression
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        class SuppressNotifyHelper<T> : IDisposable where T : NotifyPropertyChangedBase<T>
-        {
-            private readonly NotifyPropertyChangedBase<T> _source;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="NotifyPropertyChangedBase&lt;TObject&gt;.SuppressNotifyHelper&lt;T&gt;"/> class.
-            /// </summary>
-            /// <param name="source">The source.</param>
-            public SuppressNotifyHelper(NotifyPropertyChangedBase<T> source)
-            {
-                _source = source;
-                source._suppressNotify = true;
-            }
-
-            public void Dispose()
-            {
-                _source._suppressNotify = false;
-            }
-        }
+        protected IDisposable SuppressNotify => new SuppressNotifyHelper(_notifyManager);
     }
 
     #endregion
@@ -492,23 +473,6 @@ namespace LogoFX.Client.Core
 
     #endregion
 
-    #region ISuppressNotify
-
-    /// <summary>
-    /// Designates object than can suppress some notification
-    /// </summary>
-    public interface ISuppressNotify
-    {
-        /// <summary>
-        /// Gets the suppress notify.
-        /// </summary>
-        /// <remarks>Use this in "using" statement</remarks>
-        /// <value>The suppress notify.</value>
-        IDisposable SuppressNotify { get; }
-    }
-
-    #endregion
-
     #region NotifyPropertyChangedCore
 
     /// <summary>
@@ -592,6 +556,9 @@ namespace LogoFX.Client.Core
         /// </summary>
         public Action AfterValueUpdate { get; set; }
 
+        /// <summary>
+        /// Allows injecting custom value update invocation method.
+        /// </summary>
         public Action<Action> CustomActionInvocation { get; set; }
     }
 }
