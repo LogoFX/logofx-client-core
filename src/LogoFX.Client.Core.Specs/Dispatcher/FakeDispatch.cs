@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace LogoFX.Client.Core.Specs.Objects
+namespace LogoFX.Client.Core.Specs.Dispatcher
 {
     class FakeDispatch : IDispatch
     {

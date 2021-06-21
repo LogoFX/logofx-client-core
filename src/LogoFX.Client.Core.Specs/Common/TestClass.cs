@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Threading;
 
-namespace LogoFX.Client.Core.Specs.Objects
+namespace LogoFX.Client.Core.Specs.Common
 {
     public abstract class TestClassBase : NotifyPropertyChangedBase<TestClassBase>
     {        

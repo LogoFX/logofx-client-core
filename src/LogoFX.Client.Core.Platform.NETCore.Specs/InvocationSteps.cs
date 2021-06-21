@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Threading;
 using FluentAssertions;
-using LogoFX.Client.Core.Specs.Helpers;
+using LogoFX.Client.Core.Specs.Common;
 using TechTalk.SpecFlow;
 
 namespace LogoFX.Client.Core.Platform.NETCore.Specs
@@ -9,44 +9,40 @@ namespace LogoFX.Client.Core.Platform.NETCore.Specs
     [Binding]
     internal sealed class InvocationSteps
     {
-        private readonly ScenarioContext _scenarioContext;
+        private readonly DispatcherScenarioDataStoreBase<TestPlatformDispatch> _dispatcherScenarioDataStoreBase;
+        private readonly InvocationScenarioDataStoreBase _invocationScenarioDataStoreBase;
 
         public InvocationSteps(ScenarioContext scenarioContext)
         {
-            _scenarioContext = scenarioContext;
+            _dispatcherScenarioDataStoreBase =
+                new DispatcherScenarioDataStoreBase<TestPlatformDispatch>(scenarioContext);
+            _invocationScenarioDataStoreBase = new InvocationScenarioDataStoreBase(scenarioContext);
         }
 
         [Given(@"The dispatcher is set to custom dispatcher")]
         public void GivenTheDispatcherIsSetToCustomDispatcher()
         {
-            var dispatch = new TestPlatformDispatch(new PlatformDispatch());
-            if (_scenarioContext.ContainsKey("dispatch"))
-            {
-                _scenarioContext["dispatch"] = dispatch;
-            }
-            else
-            {
-                _scenarioContext.Add("dispatch", dispatch);
-            }
+            _dispatcherScenarioDataStoreBase.Dispatch = new TestPlatformDispatch(new PlatformDispatch());
         }
 
-        //TODO: Merge with the same class in LogoFX.Client.Core.Tests
-        [When(@"The '(.*)' is created here with '(.*)' parameter")]
-        public void WhenTheIsCreatedHereWithParameter(string name, string parameter)
+        //TODO: Merge with the same class in LogoFX.Client.Core.Tests - pay attention to different dispatcher types
+        [When(@"The '(.*)' is created here with dispatcher")]
+        public void WhenTheIsCreatedHereWithParameter(string name)
         {
-            var @class = TestClassHelper.CreateTestClassImpl(Assembly.GetExecutingAssembly(), name, _scenarioContext.Get<object>(parameter));
+            var @class = TestClassHelper.CreateTestClassImpl(Assembly.GetExecutingAssembly(), name,
+                _dispatcherScenarioDataStoreBase.Dispatch);
             if (@class != null)
             {
                 var isCalledRef = TestClassHelper.ListenToPropertyChange(@class, "Number");
-                _scenarioContext.Add("class", @class);
-                _scenarioContext.Add("isCalledRef", isCalledRef);
+                _invocationScenarioDataStoreBase.Class = @class;
+                _invocationScenarioDataStoreBase.IsCalledRef = isCalledRef;
             }
         }
 
         [Then(@"The property change notification is raised via the custom action invocation")]
         public void ThenThePropertyChangeNotificationIsRaisedViaTheCustomActionInvocation()
         {
-            var fakeDispatch = _scenarioContext.Get<TestPlatformDispatch>("dispatch");
+            var fakeDispatch = _dispatcherScenarioDataStoreBase.Dispatch;
             fakeDispatch.IsCustomActionInvoked.Should().BeTrue();
         }
     }
