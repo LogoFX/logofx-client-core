@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace LogoFX.Client.Core.Specs.Objects
+namespace LogoFX.Client.Core.Specs.Dispatcher
 {
     class FakeDispatch : IDispatch
     {
@@ -19,14 +19,6 @@ namespace LogoFX.Client.Core.Specs.Objects
             IsOnUiThreadCalled = true;
         }
 
-        public void InitializeDispatch()
-        {
-            
-        }
-    }
-
-    class OverriddenDispatch : FakeDispatch
-    {
-
+        public void InitializeDispatch() {}
     }
 }

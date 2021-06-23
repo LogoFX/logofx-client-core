@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Windows.Threading;
-using LogoFX.Client.Core.Specs.Objects;
+using LogoFX.Client.Core.Specs.Common;
 
 namespace LogoFX.Client.Core.Platform.NETCore.Specs
 {

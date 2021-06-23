@@ -29,7 +29,7 @@ Scenario: Invoking all properties change with defined dispatcher should raise no
 
 Scenario Outline: Single property change in regular mode with overridden dispatcher should raise notifications via the overridden dispatcher
 	Given The dispatcher is set to overridden dispatcher
-	When The '<Name>' is created with 'dispatch' parameter
+	When The '<Name>' is created with dispatcher
 	And The number is changed to 5  in regular mode
 	Then The property change notification is raised via the overridden dispatcher
 
@@ -41,6 +41,6 @@ Examples:
 
 Scenario: Changing single property with overridden dispatcher should raise notifications via the overridden dispatcher
 	Given The dispatcher is set to overridden dispatcher
-	When The 'TestOverriddenDispatcherClass' is created with 'dispatch' parameter
+	When The 'TestOverriddenDispatcherClass' is created with dispatcher
 	And The number is changed to 5 via SetProperty API
 	Then The property change notification is raised via the overridden dispatcher
