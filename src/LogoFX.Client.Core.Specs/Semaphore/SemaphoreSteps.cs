@@ -31,10 +31,7 @@ namespace LogoFX.Client.Core.Specs.Semaphore
         public void WhenTheSemaphoreIsRaisedAndDisposed()
         {
             var semaphore = _scenarioDataStoreBase.Semaphore;
-            using (semaphore.Raise())
-            {
-
-            }
+            using (semaphore.Raise()) {}
         }
 
         [Then(@"The semaphore should not be locked")]

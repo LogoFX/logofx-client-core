@@ -29,6 +29,5 @@ namespace LogoFX.Client.Core.Specs.Common
             get => GetValue<List<ValueWrapper>>();
             set => SetValue(value);
         }
-
     }
 }

@@ -19,14 +19,6 @@ namespace LogoFX.Client.Core.Specs.Dispatcher
             IsOnUiThreadCalled = true;
         }
 
-        public void InitializeDispatch()
-        {
-            
-        }
-    }
-
-    class OverriddenDispatch : FakeDispatch
-    {
-
+        public void InitializeDispatch() {}
     }
 }
