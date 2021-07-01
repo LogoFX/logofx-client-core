@@ -25,7 +25,7 @@ namespace LogoFX.Client.Core.Platform.NETCore.Specs
             _dispatcherScenarioDataStoreBase.Dispatch = new TestPlatformDispatch(new PlatformDispatch());
         }
 
-        //TODO: Merge with the same class in LogoFX.Client.Core.Tests - pay attention to different dispatcher types
+        //TODO: Merge with the same class in LogoFX.Client.Core.Specs - pay attention to different dispatcher types
         [When(@"The '(.*)' is created here with dispatcher")]
         public void WhenTheIsCreatedHereWithParameter(string name)
         {

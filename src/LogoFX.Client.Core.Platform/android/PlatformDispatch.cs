@@ -26,9 +26,7 @@ namespace System.Threading
 
         /// <inheritdoc /> 
         public void InitializeDispatch()
-        {
-            
-        }
+        {}
 
         private bool CheckAccess()
         {
@@ -58,7 +56,6 @@ namespace System.Threading
                 }
 
             }, null);
-
 
             return completionSource.Task;
         }

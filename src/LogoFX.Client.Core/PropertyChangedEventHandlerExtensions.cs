@@ -12,7 +12,6 @@ namespace LogoFX.Client.Core
     /// </summary>
     public static class PropertyChangedEventHandlerExtensions
     {
-
         /// <summary>
         /// Subscribes a handler to the <see cref="INotifyPropertyChanged.PropertyChanged"/> event for a specific property.
         /// </summary>
@@ -28,7 +27,6 @@ namespace LogoFX.Client.Core
             Action<TObject> handler)
             where TObject : INotifyPropertyChanged
         {
-
             // This is similar but not identical to:
             //   http://www.ingebrigtsen.info/post/2008/12/11/INotifyPropertyChanged-revisited.aspx
             string propertyName = source.GetPropertyName(expression);
@@ -42,7 +40,6 @@ namespace LogoFX.Client.Core
             source.PropertyChanged += ret;
             return ret;
         }
-
 
         /// <summary>
         /// Notifies the specified handler.
