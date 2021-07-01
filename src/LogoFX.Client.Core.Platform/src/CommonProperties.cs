@@ -8,7 +8,7 @@ using Windows.UI.Xaml;
 namespace LogoFX.Client.Core
 {
     /// <summary>
-    /// This is intended  to deal with missed visual and logical tree inheritance on some of poorly designed controls
+    /// This is intended to deal with missed visual and logical tree inheritance on some of poorly designed controls
     /// </summary>
     public class CommonProperties
     {
