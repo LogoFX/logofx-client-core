@@ -38,13 +38,10 @@ namespace System.Threading
             var completionSource = new TaskCompletionSource<bool>();
 
             Application.SynchronizationContext.Post(s => {
-
                 try
                 {
                     action();
-
                     completionSource.SetResult(true);
-
                 }
                 catch (TaskCanceledException)
                 {
@@ -54,7 +51,6 @@ namespace System.Threading
                 {
                     completionSource.SetException(ex);
                 }
-
             }, null);
 
             return completionSource.Task;

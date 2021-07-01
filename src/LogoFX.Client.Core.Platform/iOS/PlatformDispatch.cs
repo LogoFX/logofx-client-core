@@ -53,7 +53,6 @@ namespace System.Threading
                 {
                     completionSource.SetException(ex);
                 }
-
             });
 
             return completionSource.Task;
