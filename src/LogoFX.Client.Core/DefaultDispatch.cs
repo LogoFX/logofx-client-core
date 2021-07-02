@@ -22,8 +22,6 @@ namespace System.Threading
 
         /// <inheritdoc />
         public void InitializeDispatch()
-        {
-            
-        }
+        {}
     }
 }

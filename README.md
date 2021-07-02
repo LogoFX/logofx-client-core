@@ -3,6 +3,8 @@ Core client facilities, including Dispatcher and INotifyPropertyChanged implemen
 
 <img src=https://ci.appveyor.com/api/projects/status/github/logofx/logofx-client-core>
 
+[![CodeFactor](https://www.codefactor.io/repository/github/logofx/logofx-client-core/badge)](https://www.codefactor.io/repository/github/logofx/logofx-client-core)
+
 ## Core
 
 <img src=https://img.shields.io/nuget/dt/LogoFX.Client.Core.Core>

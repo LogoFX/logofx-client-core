@@ -13,7 +13,7 @@ namespace System.Threading
         /// The current.
         /// </value>
         public static IDispatch Current { get; set; } = CreateDefaultDispatch();
-
+        
         private static IDispatch CreateDefaultDispatch() => new DefaultDispatch();        
     }
 }

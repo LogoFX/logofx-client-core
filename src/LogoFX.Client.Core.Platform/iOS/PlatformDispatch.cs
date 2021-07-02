@@ -27,9 +27,7 @@ namespace System.Threading
 
         /// <inheritdoc /> 
         public void InitializeDispatch()
-        {
-            
-        }
+        {}
 
         private bool CheckAccess()
         {
@@ -42,13 +40,10 @@ namespace System.Threading
 
             UIApplication.SharedApplication.InvokeOnMainThread(() =>
             {
-
                 try
                 {
                     action();
-
                     completionSource.SetResult(true);
-
                 }
                 catch (TaskCanceledException)
                 {
@@ -58,7 +53,6 @@ namespace System.Threading
                 {
                     completionSource.SetException(ex);
                 }
-
             });
 
             return completionSource.Task;
