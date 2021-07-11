@@ -35,7 +35,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\Bin\android\Release\LogoFX.Client.Core.Platform.xml</DocumentationFile>    
+    <DocumentationFile>..\..\Bin\android\Release\LogoFX.Client.Core.Platform.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
