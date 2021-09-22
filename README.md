@@ -20,3 +20,5 @@ Core client facilities, including Dispatcher and INotifyPropertyChanged implemen
 [Living Documentation](https://ci.appveyor.com/api/projects/logofx/logofx-client-core/artifacts/src/LogoFX.Client.Core.Platform.NETCore.Specs/bin/Release/LivingDoc.html)
 
 [Get package](https://www.nuget.org/packages/LogoFX.Client.Core)
+
+This repository is archived. Its functionality has been moved to https://github.com/LogoFX/core
